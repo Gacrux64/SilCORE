@@ -30,9 +30,9 @@
             <div runat="server" id="right">
                 <asp:Label ID="LabelLogin" runat="server" Text="Login:"></asp:Label>
                 <br />
-                <asp:TextBox ID="TextBoxUsername" runat="server" Text="Username" ForeColor="Silver"></asp:TextBox>
+                <asp:TextBox ID="TextBoxUsername" runat="server" Text="Username"></asp:TextBox>
                 <br />
-                <asp:TextBox ID="TextBoxPassword" runat="server" Text="Password" ForeColor="Silver"></asp:TextBox>
+                <asp:TextBox ID="TextBoxPassword" runat="server" Text="Password"></asp:TextBox>
             </div>
             <div id="content">
                 <h2>
