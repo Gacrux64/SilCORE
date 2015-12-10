@@ -14,7 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <body>
+    <div>
         <div id="box">
             <header><h1>BANNER</h1></header>
             <div id="left">
@@ -27,12 +27,14 @@
                     <li><a href="">Link5</a></li>
                 </ul>
             </div>
-            <div runat="server" id="right">
-                <asp:Label ID="LabelLogin" runat="server" Text="Login:"></asp:Label>
-                <br />
-                <asp:TextBox ID="TextBoxUsername" runat="server" Text="Username"></asp:TextBox>
-                <br />
-                <asp:TextBox ID="TextBoxPassword" runat="server" Text="Password"></asp:TextBox>
+            <div id="right">
+                <div id="innerright">
+                    <asp:Label ID="LabelLogin" runat="server" Text="Login:"></asp:Label>
+                    <br />
+                    <asp:TextBox ID="TextBoxUsername" runat="server" Text="Username" ForeColor="Silver" ></asp:TextBox>
+                    <br />
+                    <asp:TextBox ID="TextBoxPassword" runat="server" Text="Password" ForeColor="Silver"></asp:TextBox>
+                    </div>
             </div>
             <div id="content">
                 <h2>
@@ -50,7 +52,7 @@
              
             </footer>
             </div>
-        <div>        
+        </div>        
     </div>
     </form>
 </body>
