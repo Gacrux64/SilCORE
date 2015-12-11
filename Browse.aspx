@@ -6,17 +6,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitle" Runat="Server">
-    Browse
+    Public Characters
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
-    <h3>Character 1</h3>
-    <img src="App_Themes/SilCOREBW/Images/Placeholder.jpg" style="float:right;height:100px; width:100px" alt="Character 1" />
+    <h3>Character 1</h3><img src="App_Themes/SilCOREBW/Images/Placeholder.jpg" style="float:right;height:100px; width:100px" alt="Character 1">
 <p>Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content</p>
 
 <hr style="clear:both;margin-top:5px;">
-<h3>Character 2</h3><img src="Placeholder.jpg" style="float:right;height:100px; width:100px; margin-bottom:2%;" alt="Character 1">
+<h3>Character 2</h3><img src="App_Themes/SilCOREBW/Images/Placeholder.jpg" style="float:right;height:100px; width:100px; margin-bottom:2%;" alt="Character 1">
 <p>Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content Place holder content</p>
 
 <hr style="clear:both;margin-top:5px;">
+</div>
+<br>
+
 </asp:Content>
 

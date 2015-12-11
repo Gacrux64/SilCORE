@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitle" Runat="Server">
+    User Registration
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
     Please complete the form to register
@@ -29,6 +30,5 @@
 </table>
 <br>
 <input type="button" value="Confirm"><input type="button" value="Reset">
-
 </asp:Content>
 

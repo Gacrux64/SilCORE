@@ -21,31 +21,15 @@
     <div>
         <div id="box">
             <header>
-                <!--
-                <div id="banner">
-                    <asp:Label ID="LabelBannerBig" runat="server" Text="SilCORE" ForeColor="White" Font-Size="XX-Large" Font-Names="Arial"></asp:Label>
-                    <br />
-                    <asp:Label ID="LabelBannerSub" runat="server" Text="Character Creation Tool" Font-Names="Arial" Font-Size="Large"></asp:Label>
-                    <canvas class="bannerline">
-
-                    </canvas>
-                    <canvas class="bannerline">
-
-                    </canvas>
-                </div>
-                -->
+                <img id="banner" src="App_Themes/SilCOREBW/Images/banner.jpg" alt="SilCORE Banner" />
             </header>
             <div id="left">
-                <div id="innerleft">
                     <h2 style="text-align:center;">Navigation</h2>
-                    <ul>
-                        <li><a href="Default.aspx">Home</a></li>
-                        <li><a href="Registration.aspx">Registration</a></li>
-                        <li><a href="Browse.aspx">Browse Characters</a></li>
-                        <li><a href="http://www.dp9.com">Dream Pod 9 Website</a></li>
-                        <li><a href="http://www.drivethrurpg.com">Drive Thru RPG</a></li>
-                    </ul>
-                </div>
+                        <a href="Default.aspx"><div class="links">Home</div></a>
+                        <a href="Registration.aspx"><div class="links">Registration</div></a>
+                        <a href="Browse.aspx"><div class="links">Browse Characters</div></a>
+                        <a href="http://www.dp9.com"><div class="links">Dream Pod 9 Website</div></a>
+                        <a href="http://www.drivethrurpg.com"><div class="links">Drive Thru RPG</div></a>
             </div>
             <div id="right">
                 <div id="innerright">
