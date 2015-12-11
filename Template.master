@@ -21,6 +21,7 @@
     <div>
         <div id="box">
             <header>
+                <!--
                 <div id="banner">
                     <asp:Label ID="LabelBannerBig" runat="server" Text="SilCORE" ForeColor="White" Font-Size="XX-Large" Font-Names="Arial"></asp:Label>
                     <br />
@@ -32,6 +33,7 @@
 
                     </canvas>
                 </div>
+                -->
             </header>
             <div id="left">
                 <div id="innerleft">
