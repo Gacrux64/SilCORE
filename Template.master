@@ -5,29 +5,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>
+        SilCORE Character Creation Tool: 
         <asp:ContentPlaceHolder ID="ContentPlaceHolderPageTitle" runat="server">
 
         </asp:ContentPlaceHolder>
     </title>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
         <div id="box">
             <header>
-                <img id="banner" src="App_Themes/SilCOREBW/Images/Banner.png" />
+                <div id="banner">
+                    <asp:Label ID="LabelBannerBig" runat="server" Text="SilCORE" ForeColor="White" Font-Size="XX-Large" Font-Names="Arial"></asp:Label>
+                    <br />
+                    <asp:Label ID="LabelBannerSub" runat="server" Text="Character Creation Tool" Font-Names="Arial" Font-Size="Large"></asp:Label>
+                    <canvas class="bannerline">
+
+                    </canvas>
+                    <canvas class="bannerline">
+
+                    </canvas>
+                </div>
             </header>
             <div id="left">
                 <div id="innerleft">
                     <h2 style="text-align:center;">Navigation</h2>
                     <ul>
-                        <li><a href="">Link1</a></li>
-                        <li><a href="">Link2</a></li>
-                        <li><a href="">Link3</a></li>
-                        <li><a href="">Link4</a></li>
-                        <li><a href="">Link5</a></li>
+                        <li><a href="Default.aspx">Home</a></li>
+                        <li><a href="Registration.aspx">Registration</a></li>
+                        <li><a href="Browse.aspx">Browse Characters</a></li>
+                        <li><a href="http://www.dp9.com">Dream Pod 9 Website</a></li>
+                        <li><a href="http://www.drivethrurpg.com">Drive Thru RPG</a></li>
                     </ul>
                 </div>
             </div>
