@@ -5,22 +5,99 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Silcore Character Creator</title>
-   
+   <script type="text/javascript">
+       function drawLines() {
+           var canvas = document.getElementsByClassName("lines");
+           for (var i = 0; i < canvas.length; i++) {
+               var width = canvas[i].width;
+               var height = canvas[i].height;
+               var ctx = canvas[i].getContext("2d");
+
+               ctx.fillStyle = 'white';
+
+               //Left line
+               ctx.beginPath()
+               ctx.moveTo(width * .5, 0);
+               //Top right to bottom right
+               ctx.lineTo(width * .2, height);
+               //Bottom right to bottom left
+               ctx.lineTo(width * 0, height);
+               //Bottom left to top left
+               ctx.lineTo(width * .3, 0);
+               //Top left to top right
+               ctx.lineTo(width * .5, 0);
+               ctx.closePath();
+
+               ctx.fill();
+
+               //Right line
+               ctx.beginPath()
+               ctx.moveTo(width * .8, 0);
+               //Top right to bottom right
+               ctx.lineTo(width * .5, height);
+               //Bottom right to bottom left
+               ctx.lineTo(width * .3, height);
+               //Bottom left to top left
+               ctx.lineTo(width * .6, 0);
+               //Top left to top right
+               ctx.lineTo(width * .8, 0);
+               ctx.closePath();
+
+               ctx.fill();
+           }
+       }
+    </script>
 </head>
-<body>
+<body onload="drawLines()">
     <form id="form1" runat="server">
     <div>
         <div id="box">
             <header>
-                <img id="banner" src="App_Themes/SilCOREBW/Images/banner.jpg" alt="SilCORE Banner" />
+                <div style="padding-top:2%;padding-left:3%;float:left;">
+                    <span id="largeBannerText">
+                        SilCORE
+                    </span>
+                    <br />
+                    <span id="smallBannerText">
+                        Character Creation Tool
+                    </span>
+                </div>
+                <canvas class="lines" style="float:left;width:25%;margin-right:5%;background-color:black;"></canvas>
+                <br style="clear:both;"/>
             </header>
             <div id="left">
                     <h2 style="text-align:center;">Navigation</h2>
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Default.aspx")">
+                            <span class="navSpan">Home</span>
+                            <canvas class="lines" style="width:30%;""></canvas>   
+                        </div>
+                
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Registration.aspx")">
+                            <span class="navSpan">Registration</span>
+                            <canvas class="lines" style="width:30%;""></canvas>
+                        </div>
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Browse.aspx")">
+                            <span class="navSpan">Browse</span>
+                            <canvas class="lines" style="width:30%;""></canvas>
+                        </div>
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("http://www.dp9.com")">
+                            <span class="navSpan">Dream Pod 9</span>
+                            <canvas class="lines" style="width:30%;""></canvas>
+                        </div>
+                        <div class="navDiv" id="navDivID" onmouseover="flipColour()" onclick="goTo("http://www.drivethrurpg.com")">
+                            <span class="navSpan">Drive Thru RPG</span>
+                            <canvas class="lines" style="width:30%;""></canvas>
+                        </div>
+                <br />
+                <br />
+                <img src="App_Themes/SilCOREBW/Images/dp9logo.jpg" style="margin-left:auto;margin-right:auto;display:block;" alt="Dream Pod 9 logo" />
+                        <!--
                         <a href="Default.aspx"><div class="links">Home</div></a>
                         <a href="Registration.aspx"><div class="links">Registration</div></a>
                         <a href="Browse.aspx"><div class="links">Browse Characters</div></a>
                         <a href="http://www.dp9.com"><div class="links">Dream Pod 9 Website</div></a>
                         <a href="http://www.drivethrurpg.com"><div class="links">Drive Thru RPG</div></a>
+                        -->
             </div>
             <div id="content2">
                 <h2>
