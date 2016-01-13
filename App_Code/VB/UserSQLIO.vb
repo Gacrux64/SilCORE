@@ -8,11 +8,11 @@ Module PDUserSQLIO
         Dim status As Boolean = False
 
         Try
-            Dim connectionStringPerDiem As String = "Data Source=CORE-DB2;Initial Catalog=PERDIUMDB;User ID=SOPSA;Password=SO"
+            Dim connectionStringPerDiem As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Builder.mdf;Integrated Security=True"
             connectionPerDiem = New SqlConnection(connectionStringPerDiem)
             status = True
         Catch ex As Exception
-            NewErrorMail(ex.ToString(), "The PERDIUMDB Database is unreachable.", "NewDBConnection Function.")
+            NewErrorMail(ex.ToString(), "The Builder Database is unreachable.", "NewDBConnection Function.")
         End Try
 
         Return status
@@ -20,12 +20,11 @@ Module PDUserSQLIO
 
     Function NewInsertCommand(ByVal sqlConn As SqlConnection) As SqlCommand
 
-        Dim insertComm As SqlCommand = New SqlCommand("INSERT INTO PERDIUMDB.dbo.PERDIUM_USERS (USER_ID, USER_LOGIN, USER_EMAIL, USER_NAME, USER_PERD_PASSWORD, USER_ID_CHECK, USER_SYSTEM) " +
-                            "VALUES ((SELECT MAX(USER_ID)+1 FROM PERDIUM_USERS)," +
+        Dim insertComm As SqlCommand = New SqlCommand("INSERT INTO builder.dbo.USER (USER_LOGIN, USER_FIRST, USER_LAST, USER_EMIAL, USER_LOGIN, USER_PASSWORD, USER_SALT, USER_ADMIN) " +
                             "@login," +
                             "@email," +
                             "@name," +
-                            "@perdPassword," +
+                            "@Password," +
                             "CONVERT(varbinary(MAX), @salt)," +
                             "@userType)", sqlConn)
         Return insertComm
