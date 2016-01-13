@@ -177,9 +177,11 @@ margin-right:0px;
 div.navDiv
 {
     color:white;
-    border-style: solid;
+    
+    border-top:solid;
     border-width: 1px;
 	border-color:white;
+    height:7.6%;
 }
 
 span.navSpan
@@ -188,4 +190,12 @@ span.navSpan
     font-size:125%;
     padding-left:5%;
     padding-bottom:10%;
+}
+.lines{
+    float:right;
+    padding-right:2%;
+}
+#navDivID{
+    border-bottom:solid;
+    border-width:1px;
 }
