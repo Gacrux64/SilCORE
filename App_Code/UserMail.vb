@@ -1,6 +1,6 @@
 ﻿Imports System.Net.Mail
 
-Module PDUserMail
+Module UserMail
 
     'E-mail-related functions
     Function NewPasswordEmail(ByVal name As String, ByVal login As String, ByVal password As String) As String

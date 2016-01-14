@@ -49,7 +49,7 @@ Module PDUserSQLIO
     End Function
 
     'Entering the new user into the USER table. If an error occurs along the way, a descriptive e-mail will be sent to the Scribe team and the entire application will exit.
-    Function EnterUser(ByVal firstName As String, ByVal lastName As String, ByVal login As String, ByVal email As String, ByVal salt As Byte(), ByVal password As Byte(), ByVal userType As Integer) As Boolean
+    Function EnterUser(ByVal firstName As String, ByVal lastName As String, ByVal login As String, ByVal email As String, ByVal salt As Byte(), ByVal password As Byte()) As Boolean
 
         Dim status As Boolean = False
 
@@ -68,7 +68,7 @@ Module PDUserSQLIO
             insertComm.Parameters.Add("@login", SqlDbType.NVarChar, -1).Value = login
             insertComm.Parameters.Add("@password", SqlDbType.NVarChar, -1).Value = Convert.ToBase64String(password)
             insertComm.Parameters.Add("@salt", SqlDbType.NVarChar, -1).Value = Convert.ToBase64String(salt)
-            insertComm.Parameters.Add("@userType", SqlDbType.Int, -1).Value = userType
+            insertComm.Parameters.Add("@userType", SqlDbType.Int, -1).Value = 0
 
             connectionBuilder.Open()
 

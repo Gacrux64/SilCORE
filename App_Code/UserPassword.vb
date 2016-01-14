@@ -1,17 +1,6 @@
 ﻿Imports System.Security.Cryptography
 
-Module PDUserPassword
-
-    'Password-related functions
-    Function GeneratePassword() As String
-        Dim password As String
-
-        password = System.Guid.NewGuid().ToString
-        password = password.Replace("-", String.Empty)
-        password = password.Substring(0, 5)
-
-        Return password
-    End Function
+Module UserPassword
 
     Function GenerateSalt() As Byte()
         Dim salt(8) As Byte
@@ -26,7 +15,7 @@ Module PDUserPassword
 
         Dim fixedSalt(8) As Byte
 
-        fixedSalt = Convert.FromBase64String("+Gelref/")
+        fixedSalt = Convert.FromBase64String("+eroclis/")
         password = Convert.ToBase64String(salt) + password + Convert.ToBase64String(fixedSalt)
 
 3:      Dim passwordBytes() As Byte = System.Text.Encoding.UTF8.GetBytes(password)

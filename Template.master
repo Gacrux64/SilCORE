@@ -13,6 +13,7 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
     <script type="text/javascript">
+
         function drawLines() {
             var canvas = document.getElementsByClassName("lines");
             for (var i = 0; i < canvas.length; i++) {
