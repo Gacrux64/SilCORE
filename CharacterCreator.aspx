@@ -46,6 +46,9 @@
                ctx.fill();
            }
        }
+       function goTo(url) {
+           window.location.href = url;
+       }
     </script>
 </head>
 <body onload="drawLines()">
@@ -62,36 +65,37 @@
                         Character Creation Tool
                     </span>
                 </div>
-                <canvas class="lines" style="float:left;width:25%;margin-right:5%;background-color:black;"></canvas>
+                <canvas class="lines" style="float:left;width:25%;margin-right:5%;background: rgba(00, 0, 0, 0.0); "></canvas>
                 <br style="clear:both;"/>
             </header>
             <div id="left">
                     <h2 style="text-align:center;">Navigation</h2>
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Default.aspx")">
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo('Default.aspx')">
                             <span class="navSpan">Home</span>
                             <canvas class="lines" style="width:30%;""></canvas>   
                         </div>
                 
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Registration.aspx")">
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo('Registration.aspx')">
                             <span class="navSpan">Registration</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Browse.aspx")">
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo('Browse.aspx')">
                             <span class="navSpan">Browse</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("http://www.dp9.com")">
+                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo('http://www.dp9.com')">
                             <span class="navSpan">Dream Pod 9</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
-                        <div class="navDiv" id="navDivID" onmouseover="flipColour()" onclick="goTo("http://www.drivethrurpg.com")">
+                        <div class="navDiv" id="navDivID" onmouseover="flipColour()" onclick="goTo('http://www.drivethrurpg.com')">
                             <span class="navSpan">Drive Thru RPG</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
                 <br />
                 <br />
                 <img src="App_Themes/SilCOREBW/Images/dp9logo.jpg" style="margin-left:auto;margin-right:auto;display:block;" alt="Dream Pod 9 logo" />
-                        <!--
+                <div style="text-align:center;font-size:0.5em;font-style:italic;">&copy; Dream Pod 9</div>       
+                 <!--
                         <a href="Default.aspx"><div class="links">Home</div></a>
                         <a href="Registration.aspx"><div class="links">Registration</div></a>
                         <a href="Browse.aspx"><div class="links">Browse Characters</div></a>

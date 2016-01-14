@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Template.master.cs" Inherits="Template" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="CharacterTemplate.master.cs" Inherits="MasterPage" %>
 
 <!DOCTYPE html>
 
@@ -13,7 +13,6 @@
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
     <script type="text/javascript">
-
         function drawLines() {
             var canvas = document.getElementsByClassName("lines");
             for (var i = 0; i < canvas.length; i++) {
@@ -54,9 +53,90 @@
                 ctx.fill();
             }
         }
+        function goTo(url) {
+            window.location.href = url;
+        }
+        function flipColour(canvasNum) {
+            var canvas = document.getElementsByClassName("lines");
+
+            var width = canvas[canvasNum].width;
+            var height = canvas[canvasNum].height;
+            var ctx = canvas[canvasNum].getContext("2d");
+
+            ctx.fillStyle = 'black';
+
+            //Left line
+            ctx.beginPath()
+            ctx.moveTo(width * .5, 0);
+            //Top right to bottom right
+            ctx.lineTo(width * .2, height);
+            //Bottom right to bottom left
+            ctx.lineTo(width * 0, height);
+            //Bottom left to top left
+            ctx.lineTo(width * .3, 0);
+            //Top left to top right
+            ctx.lineTo(width * .5, 0);
+            ctx.closePath();
+
+            ctx.fill();
+
+            //Right line
+            ctx.beginPath()
+            ctx.moveTo(width * .8, 0);
+            //Top right to bottom right
+            ctx.lineTo(width * .5, height);
+            //Bottom right to bottom left
+            ctx.lineTo(width * .3, height);
+            //Bottom left to top left
+            ctx.lineTo(width * .6, 0);
+            //Top left to top right
+            ctx.lineTo(width * .8, 0);
+            ctx.closePath();
+
+            ctx.fill();
+        }
+        function reflipColour(canvasNum) {
+            var canvas = document.getElementsByClassName("lines");
+
+            var width = canvas[canvasNum].width;
+            var height = canvas[canvasNum].height;
+            var ctx = canvas[canvasNum].getContext("2d");
+
+            ctx.fillStyle = 'white';
+
+            //Left line
+            ctx.beginPath()
+            ctx.moveTo(width * .5, 0);
+            //Top right to bottom right
+            ctx.lineTo(width * .2, height);
+            //Bottom right to bottom left
+            ctx.lineTo(width * 0, height);
+            //Bottom left to top left
+            ctx.lineTo(width * .3, 0);
+            //Top left to top right
+            ctx.lineTo(width * .5, 0);
+            ctx.closePath();
+
+            ctx.fill();
+
+            //Right line
+            ctx.beginPath()
+            ctx.moveTo(width * .8, 0);
+            //Top right to bottom right
+            ctx.lineTo(width * .5, height);
+            //Bottom right to bottom left
+            ctx.lineTo(width * .3, height);
+            //Bottom left to top left
+            ctx.lineTo(width * .6, 0);
+            //Top left to top right
+            ctx.lineTo(width * .8, 0);
+            ctx.closePath();
+
+            ctx.fill();
+        }
     </script>
 </head>
-<body onload="drawLines()">
+<body>
     <form id="form1" runat="server">
     <div>
         <div id="box">
@@ -70,35 +150,38 @@
                         Character Creation Tool
                     </span>
                 </div>
-                <canvas class="lines" style="float:left;width:25%;margin-right:5%;background-color:black;"></canvas>
+                <canvas class="lines" style="float:left;width:25%;margin-right:5%;background: rgba(00, 0, 0, 0.0); "></canvas>
                 <br style="clear:both;"/>
             </header>
             <div id="left">
                     <h2 style="text-align:center;">Navigation</h2>
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Default.aspx")">
+                        <div class="navDiv" onmouseover="flipColour(1)" onmouseout="reflipColour(1)" onclick="goTo('Default.aspx')">
                             <span class="navSpan">Home</span>
                             <canvas class="lines" style="width:30%;""></canvas>   
                         </div>
                 
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Registration.aspx")">
+                        <div class="navDiv" onmouseover="flipColour(2)" onmouseout="reflipColour(2)"  onclick="goTo('Registration.aspx')">
                             <span class="navSpan">Registration</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("Browse.aspx")">
+                        <div class="navDiv" onmouseover="flipColour(3)" onmouseout="reflipColour(3)"  onclick="goTo('Browse.aspx')">
                             <span class="navSpan">Browse</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
-                        <div class="navDiv" onmouseover="flipColour()" onclick="goTo("http://www.dp9.com")">
+                        <div class="navDiv" onmouseover="flipColour(4)" onmouseout="reflipColour(4)"  onclick="goTo('http://www.dp9.com')">
                             <span class="navSpan">Dream Pod 9</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
-                        <div class="navDiv" id="navDivID" onmouseover="flipColour()" onclick="goTo("http://www.drivethrurpg.com")">
+                        <div class="navDiv" id="navDivID" onmouseover="flipColour(5)" onmouseout="reflipColour(5)"  onclick="goTo('http://www.drivethrurpg.com')">
                             <span class="navSpan">Drive Thru RPG</span>
                             <canvas class="lines" style="width:30%;""></canvas>
                         </div>
                 <br />
                 <br />
+
                 <img src="App_Themes/SilCOREBW/Images/dp9logo.jpg" style="margin-left:auto;margin-right:auto;display:block;" alt="Dream Pod 9 logo" />
+               
+               <div style="text-align:center;font-size:0.5em;font-style:italic;">&copy; Dream Pod 9</div>
                 
                         <!--
                         <a href="Default.aspx"><div class="links">Home</div></a>
@@ -108,32 +191,22 @@
                         <a href="http://www.drivethrurpg.com"><div class="links">Drive Thru RPG</div></a>
                         -->
             </div>
-            <div id="right">
-                <div id="innerright">
-                    <asp:Label ID="LabelLogin" runat="server" Text="Login:"></asp:Label>
-                    <br />
-                    <asp:TextBox ID="TextBoxUsername" runat="server" Text="Username" ForeColor="Silver" ></asp:TextBox>
-                    <br />
-                    <asp:TextBox ID="TextBoxPassword" runat="server" Text="Password" ForeColor="Silver"></asp:TextBox>
-                    </div>
-            </div>
-            <div id="content">
+            <div id="content2">
                 <h2>
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderTitle" runat="server">
                     
                     </asp:ContentPlaceHolder>
                 </h2>
-                <div id="contentBox">
+                <div id="contentBox2">
                     <asp:ContentPlaceHolder id="ContentPlaceHolderMainBox" runat="server">
         
                     </asp:ContentPlaceHolder>
             </div>
-            
-            <footer>
+                <footer id="footer2">
              
             </footer>
             </div>
-        </div>        
+        
     </div>
     </form>
 </body>
