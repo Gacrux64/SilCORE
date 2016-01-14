@@ -182,7 +182,7 @@
 
                 <img src="App_Themes/SilCOREBW/Images/dp9logo.jpg" style="margin-left:auto;margin-right:auto;display:block;" alt="Dream Pod 9 logo" />
                
-               <div style="text-align:center;font-size:0.5em;font-style:italic;">&copy; Dream Pod 9</div>
+               <div style="text-align:center;font-size:0.75em;font-style:italic;">&copy; Dream Pod 9</div>
                 
                         <!--
                         <a href="Default.aspx"><div class="links">Home</div></a>
@@ -213,8 +213,8 @@
                     </asp:ContentPlaceHolder>
             </div>
             
-            <footer>
-             
+            <footer style="font-size:0.75em">
+             &copy; Silcore
             </footer>
             </div>
         </div>        
