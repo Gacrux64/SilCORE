@@ -50,17 +50,17 @@ Module UserMail
             newMail.Subject = subject
             newMail.Body = body
 
-            Dim mailClient As New SmtpClient()
-            mailClient.Host = "core-exchange.speedware.com"
-            mailClient.EnableSsl = False
-            mailClient.Port = 25
+            Dim mailClient As New SmtpClient("smtp.gmail.com", 465)
+            mailClient.EnableSsl = True
+
+            mailClient.Credentials = New Net.NetworkCredential("SilCORECB@gmail.com", "64trinity92")
 
             mailClient.DeliveryMethod = SmtpDeliveryMethod.Network
             mailClient.Send(newMail)
 
             status = True
         Catch ex As Exception
-            NewErrorMail(ex.ToString, "The initial login information e-mail was unable to be sent. Please contact HR and IT to verify the address: " + email + ".", "SendEMail Function")
+            NewErrorMail(ex.ToString, "The initial login information e-mail was unable To be sent. Please contact HR And IT To verify the address: " + email + ".", "SendEMail Function")
             status = False
         End Try
 
