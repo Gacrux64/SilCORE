@@ -24,7 +24,7 @@ public partial class Registration : System.Web.UI.Page
 
         if (fname.Equals(""))
         {
-            fnameAlert.Text = "*Enter your First name<br>";
+            fnameAlert.Text = "*Enter your First name";
             valid=false;
         }
         else
@@ -33,7 +33,7 @@ public partial class Registration : System.Web.UI.Page
         }
         if (lname.Equals(""))
         {
-            lnameAlert.Text = "*Enter your Last name<br>";
+            lnameAlert.Text = "*Enter your Last name";
             valid=false;
         }
         else
@@ -42,7 +42,7 @@ public partial class Registration : System.Web.UI.Page
         }
         if (username.Equals(""))
         {
-            usernameAlert.Text = "*Enter a username<br>";
+            usernameAlert.Text = "*Enter a username";
             valid=false;        
         }
         else
@@ -51,7 +51,7 @@ public partial class Registration : System.Web.UI.Page
         }
         if (email.Equals(""))
         {
-            emailAlert.Text = "*Enter your e-mail<br>";
+            emailAlert.Text = "*Enter your e-mail";
             valid=false;
         }
         else
@@ -60,7 +60,7 @@ public partial class Registration : System.Web.UI.Page
         }
         if (pass.Equals(""))
         {
-            passAlert.Text = "*Enter a password<br>";
+            passAlert.Text = "*Enter a password";
             valid=false;
         }
         else
@@ -69,7 +69,7 @@ public partial class Registration : System.Web.UI.Page
         }
         if (cpass.Equals("") || !cpass.Equals(pass))
         {
-            confpassAlert.Text = "*Confirm your password<br>";
+            confpassAlert.Text = "*Confirm your password";
             valid=false;
         }
         else

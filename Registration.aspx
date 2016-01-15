@@ -14,47 +14,29 @@
 <br />
     <br />
 <br />
-
-<table>
-<tr>
-<td>First Name</td><td>
-    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-    </td>
-</tr>
-<tr>
-<td>Last Name</td><td>
-    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-    </td>
-</tr>
-<tr>
-<td>User Name</td><td>
-    <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-    </td>
-</tr>
-<tr>
-<td>E-mail</td><td>
-    <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-    </td>
-</tr>
-<tr>
-<td>Password</td><td>
-    <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-    </td>
-</tr>
-<tr>
-<td>Confirm Password</td><td>
-    <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
-    </td>
-</tr>
-
-</table>
-    <br />
+    <div id="labels" style="float:left; display:inline-block;">
+        First Name<br /><asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
     <asp:Label ID="fnameAlert" runat="server" ForeColor="Gray"></asp:Label>
+        <br />
+        Last Name <br /><asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
     <asp:Label ID="lnameAlert" runat="server" ForeColor="Gray"></asp:Label>
+        <br />
+        User Name<br /><asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
     <asp:Label ID="usernameAlert" runat="server" ForeColor="Gray"></asp:Label>
+        <br />
+        E-mail<br /><asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
     <asp:Label ID="emailAlert" runat="server" ForeColor="Gray"></asp:Label>
+        <br />
+        Password<br /><asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
     <asp:Label ID="passAlert" runat="server" ForeColor="Gray"></asp:Label>
+        <br />
+        Confirm Password<br /><asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
     <asp:Label ID="confpassAlert" runat="server" ForeColor="Gray"></asp:Label>
+        <br />
+    </div>
+    
+       
+    <br style="clear:both;" />
 <br />
 &nbsp;<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
     <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Reset" />
