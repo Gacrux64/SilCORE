@@ -24,36 +24,60 @@ public partial class Registration : System.Web.UI.Page
 
         if (fname.Equals(""))
         {
-            Label1.Text = "*Enter your First name";
+            fnameAlert.Text = "*Enter your First name<br>";
             valid=false;
+        }
+        else
+        {
+            fnameAlert.Text = "";
         }
         if (lname.Equals(""))
         {
-            Label2.Text = "*Enter your Last name";
+            lnameAlert.Text = "*Enter your Last name<br>";
             valid=false;
+        }
+        else
+        {
+            lnameAlert.Text = "";
         }
         if (username.Equals(""))
         {
-            Label3.Text = "*Enter a username";
+            usernameAlert.Text = "*Enter a username<br>";
             valid=false;        
+        }
+        else
+        {
+            usernameAlert.Text = "";
         }
         if (email.Equals(""))
         {
-            Label4.Text = "*Enter your e-mail";
+            emailAlert.Text = "*Enter your e-mail<br>";
             valid=false;
+        }
+        else
+        {
+            emailAlert.Text = "";
         }
         if (pass.Equals(""))
         {
-            Label5.Text = "*Enter a password";
+            passAlert.Text = "*Enter a password<br>";
             valid=false;
+        }
+        else
+        {
+            passAlert.Text = "";
         }
         if (cpass.Equals("") || !cpass.Equals(pass))
         {
-            Label6.Text = "*Confirm your password";
+            confpassAlert.Text = "*Confirm your password<br>";
             valid=false;
         }
+        else
+        {
+            confpassAlert.Text = "";
+        }
         if(valid){
-            Label6.Text = "hello validation";
+            
             //Query statement
         }
     }
@@ -65,11 +89,11 @@ public partial class Registration : System.Web.UI.Page
         TextBox4.Text = "";
         TextBox5.Text = "";
         TextBox6.Text = "";
-        Label1.Text = "";
-        Label2.Text = "";
-        Label3.Text = "";
-        Label4.Text = "";
-        Label5.Text = "";
-        Label6.Text = "";
+        fnameAlert.Text = "";
+        lnameAlert.Text = "";
+        usernameAlert.Text = "";
+        emailAlert.Text = "";
+        passAlert.Text = "";
+        confpassAlert.Text = "";
     }
 }
