@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NewUser;
+
 
 public class CreateUser
 {
-    public CreateUser(firstName, lastName, login, email, password)
+    public CreateUser(String firstName, String lastName, String login, String email, String password)
     {
-        Boolean status = False;
+        Boolean status = false;
 
-        Byte[] salt = GenerateSalt();
-        Byte[] encryptedPassword = EncodePassword(password, salt);
+        NewUser.UserPassword PWClass = new UserPassword();
+
+        Byte[] salt = PWClass.GenerateSalt();
+        Byte[] encryptedPassword = PWClass.EncodePassword(password, salt);
 
         String mailBody = NewPasswordEmail(firstName, login, password);
 
@@ -18,7 +22,7 @@ public class CreateUser
         {
             If(SendEmail("CharacterCreator@DP9.com", email, "New SilCORE Character Creator System User", mailBody))
             {
-                status = True;
+                status = true;
             }
             Else
             {
