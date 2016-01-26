@@ -34,7 +34,7 @@ namespace NewUser
             }
             catch (Exception ex)
             {
-                NewErrorMail(ex.ToString(), "The Database Is unreachable.", "NewDBConnection Function.");
+                //NewErrorMail(ex.ToString(), "The Database Is unreachable.", "NewDBConnection Function.");
             }
 
             return status;
@@ -68,7 +68,7 @@ namespace NewUser
             }
             catch (Exception ex)
             {
-                NewErrorMail(ex.ToString(), "The insert command to register a new user has failed.", "ExecuteInsertCommand Sub.");
+                //NewErrorMail(ex.ToString(), "The insert command to register a new user has failed.", "ExecuteInsertCommand Sub.");
             }
 
             return status;

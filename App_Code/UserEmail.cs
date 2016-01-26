@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NewUser;
 
 /// <summary>
 /// Summary description for Class1
 /// </summary>
-public class UserMail
+/// 
+
+namespace NewUser
 {
-    public UserMail()
+    public class UserMail
     {
-        //
-        // TODO: Add constructor logic here
-        //
+        public UserMail()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
     }
 }
