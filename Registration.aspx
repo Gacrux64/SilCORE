@@ -12,7 +12,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
     <span>Please complete the form to register</span>
     <br />
-    <br />
+    <asp:label ID="LabelMsg" runat="server" text="" ForeColor="White"></asp:label>
     <br />
     <div id="labels" style="float:left; display:inline-block;">
         First Name<br /><asp:TextBox ID="TextBoxFirstName" runat="server"></asp:TextBox>
@@ -41,7 +41,7 @@
     <br style="clear:both;" />
 <br />
 &nbsp;<asp:Button ID="ButtonSubmit" runat="server" OnClick="ButtonSubmit_Click" Text="Submit" />
-    <asp:Button ID="ButtonCancel" runat="server" OnClick="ButtonCancel_Click" Text="Reset" />
+    <asp:Button ID="ButtonCancel" runat="server" OnClick="ButtonCancel_Click" Text="Reset" CausesValidation="False" />
  
     <br />
  

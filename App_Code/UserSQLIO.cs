@@ -14,27 +14,23 @@ namespace NewUser
 {
     public class UserSQLIO
     {
-        public UserSQLIO()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         //Database related functions
         public Boolean NewDBConnection(SqlConnection connectionBuilder)
         {
+
+            NewUser.UserMail MailClass = new UserMail();
             Boolean status = false;
 
             try
             {
-                String connectionStringBuilder = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Builder.mdf;Integrated Security=True";
+                
+                String connectionStringBuilder = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Builder.mdf;Integrated Security=True";
                 connectionBuilder = new SqlConnection(connectionStringBuilder);
                 status = true;
             }
             catch (Exception ex)
             {
-                //NewErrorMail(ex.ToString(), "The Database Is unreachable.", "NewDBConnection Function.");
+                MailClass.NewErrorMail(ex.ToString(), "The Database Is unreachable.", "NewDBConnection Function.");
             }
 
             return status;
@@ -42,7 +38,7 @@ namespace NewUser
 
         public SqlCommand NewInsertCommand(SqlConnection sqlConn)
         {
-            SqlCommand insertComm = new SqlCommand("INSERT INTO  Builder.dbo.USER(USER_FIRST, USER_LAST, USER_EMAIL, USER_LOGIN, USER_PASSWORD, USER_SALT, USER_ADMIN) " +
+            SqlCommand insertComm = new SqlCommand("INSERT INTO USER_INFO(USER_FIRST, USER_LAST, USER_EMAIL, USER_LOGIN, USER_PASSWORD, USER_SALT, USER_ADMIN) " +
                                 "VALUES (" +
                                 "@firstName," +
                                 "@lastName," +
@@ -57,6 +53,7 @@ namespace NewUser
 
         public Boolean ExecuteInsertCommand(SqlCommand insertComm)
         {
+            NewUser.UserMail MailClass = new UserMail();
             Boolean status = false;
 
             try
@@ -68,7 +65,7 @@ namespace NewUser
             }
             catch (Exception ex)
             {
-                //NewErrorMail(ex.ToString(), "The insert command to register a new user has failed.", "ExecuteInsertCommand Sub.");
+                MailClass.NewErrorMail(ex.ToString(), "The insert command to register a new user has failed.", "ExecuteInsertCommand Sub.");
             }
 
             return status;
@@ -99,6 +96,7 @@ namespace NewUser
                 insertComm.Parameters.Add("@userType", SqlDbType.Int, -1).Value = 0;
 
                 //Execute the insert command using the insert statement, can throw an error.
+                connectionBuilder.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Builder.mdf;Integrated Security=True";
                 connectionBuilder.Open();
 
                 if (ExecuteInsertCommand(insertComm))

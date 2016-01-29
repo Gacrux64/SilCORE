@@ -9,11 +9,6 @@ namespace NewUser
 {
     public class UserPassword
     {
-        public UserPassword()
-        {
-        
-        }
-
         public Byte[] GenerateSalt()
         {
             Byte[] salt = new Byte[8];
@@ -26,7 +21,7 @@ namespace NewUser
         {
             Byte[] fixedSalt = new Byte[8];
 
-            fixedSalt = Convert.FromBase64String("+eroclis/");
+            fixedSalt = Convert.FromBase64String("+eroclis");
             password = Convert.ToBase64String(salt) + password + Convert.ToBase64String(fixedSalt);
 
             Byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
