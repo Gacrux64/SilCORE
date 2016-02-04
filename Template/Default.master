@@ -73,12 +73,23 @@
             </div>
             <div id="right">
                 <div id="innerright">
-                    <asp:Label ID="LabelLogin" runat="server" Text="Login:"></asp:Label>
-                    <br />
-                    <asp:TextBox ID="TextBoxUsername" runat="server" Text="Username" ForeColor="Silver" ></asp:TextBox>
-                    <br />
-                    <asp:TextBox ID="TextBoxPassword" runat="server" Text="Password" ForeColor="Silver"></asp:TextBox>
+                    <div id="loginControls" runat="server" visible="false">
+                        <asp:Label ID="LabelLogin" runat="server" Text="Login:"></asp:Label>
+                        <br />
+                        <asp:TextBox ID="TextBoxUsername" onfocus="clearUsername()" onblur="fillUsername()" runat="server" Value="Username" ForeColor="Silver" EnableTheming="True"></asp:TextBox>
+                        <br />
+                        <asp:TextBox ID="TextBoxPassword" onfocus="clearPassword()" onblur="fillPassword()" runat="server" Value="Password" ForeColor="Silver"></asp:TextBox>
+                        <br />
+                        <asp:Button ID="ButtonLogin" runat="server" Text="Login" Width="145px" OnClick="ButtonLogin_Click" />
+                        <br />
+                        <asp:Label ID="LabelLoginMes" runat="server" Text=""></asp:Label>
                     </div>
+                    <div id="loggedIn" runat="server" visible="false">
+                        <asp:Label ID="LabelLoggedIn" runat="server" Text="You are logged in:"></asp:Label>
+                        <br />
+                        <asp:Label ID="LabelUsername" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
             </div>
             <div id="content">
                 <h2>
