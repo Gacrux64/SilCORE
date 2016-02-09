@@ -30,18 +30,63 @@ public partial class Template : System.Web.UI.MasterPage
         else
         {
             loggedIn.Visible = true;
-            LabelUsername.Text = Session["user"].ToString();
+
+            SqlConnection uIDConn = GetDBCOnnection();
+            SqlCommand getUID = new SqlCommand("SELECT USER_LOGIN FROM USER_INFO WHERE USER_ID LIKE @userID", uIDConn);
+            SqlParameter uIDPar = new SqlParameter("userID", Session["user"].ToString());
+            getUID.Parameters.Add(uIDPar);
+
+            uIDConn.Open();
+            using (SqlDataReader sqlReader = getUID.ExecuteReader())
+            {
+
+                while (sqlReader.Read())
+                {
+                    LabelUsername.Text = sqlReader["USER_LOGIN"].ToString().Substring(0, 1).ToUpper() + sqlReader["USER_LOGIN"].ToString().Substring(1, sqlReader["USER_LOGIN"].ToString().Length - 1);
+                }
+            }
+            uIDConn.Close();
         }
     }   
 
     protected void ButtonLogin_Click(object sender, EventArgs e)
     {
-        if(login(TextBoxUsername.Text, TextBoxPassword.Text))
+
+        if (TextBoxUsername.Text.Equals("Username") && TextBoxPassword.Text.Equals("Password") || TextBoxUsername.Text.Equals("") && TextBoxPassword.Text.Equals(""))
         {
-            Session["user"] = TextBoxUsername.Text;
+            LabelLoginMes.Text = "Enter your username and password.";
+        }
+        else if(TextBoxPassword.Text.Equals("Password") || TextBoxPassword.Text.Equals(""))
+        {
+            LabelLoginMes.Text = "Enter your password";
+        }
+        else if (TextBoxUsername.Text.Equals("Username") || TextBoxUsername.Text.Equals(""))
+        {
+            LabelLoginMes.Text = "Enter your username.";
+            TextBoxPassword.Text = String.Empty;
+            TextBoxPassword.Attributes["value"] = "Password";
+        }
+        else if(login(TextBoxUsername.Text.ToLower(), TextBoxPassword.Text.ToLower()))
+        {
+
+            SqlConnection uIDConn = GetDBCOnnection();
+            SqlCommand getUID = new SqlCommand("SELECT USER_ID, USER_LOGIN FROM USER_INFO WHERE USER_LOGIN LIKE @userLogin", uIDConn);
+            SqlParameter uIDPar = new SqlParameter("userLogin", TextBoxUsername.Text.ToLower());
+            getUID.Parameters.Add(uIDPar);
+
+            uIDConn.Open();
+            using (SqlDataReader sqlReader = getUID.ExecuteReader())
+            {
+
+                while (sqlReader.Read())
+                {
+                    Session["user"] = sqlReader["USER_ID"].ToString();
+                    LabelUsername.Text = sqlReader["USER_LOGIN"].ToString().Substring(0, 1).ToUpper() + sqlReader["USER_LOGIN"].ToString().Substring(1, sqlReader["USER_LOGIN"].ToString().Length - 1);
+                }
+            }
+            uIDConn.Close();
             loggedIn.Visible = true;
             loginControls.Visible = false;
-            LabelUsername.Text = Session["user"].ToString();
         }
     }
 
@@ -96,8 +141,6 @@ public partial class Template : System.Web.UI.MasterPage
            
             while (sqlReader.Read())
             {
-
-                LabelLoginMes.Text += sqlReader["USER_PASSWORD"].ToString();
                 if (sqlReader["USER_PASSWORD"].ToString().Equals(encrpytedPassword))
                 {
                     match = true;
@@ -105,6 +148,8 @@ public partial class Template : System.Web.UI.MasterPage
                 else
                 {
                     LabelLoginMes.Text = "Incorrect password.";
+                    TextBoxPassword.Text = String.Empty;
+                    TextBoxPassword.Attributes["value"] = "Password";
                 }
             }
             loginConn.Close();
@@ -167,5 +212,16 @@ public partial class Template : System.Web.UI.MasterPage
     protected void TextBoxUsername_TextChanged(object sender, EventArgs e)
     {
 
+    }
+
+    protected void LinkButtonLogout_Click(object sender, EventArgs e)
+    {
+        Session["user"] = null;
+        Response.Redirect("Default.aspx");
+    }
+
+    protected void LinkButtonUser_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("UserPage.aspx");
     }
 }

@@ -4,74 +4,93 @@
 Character Creator
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
-    <script>
-        var contentUntouched = "";
-    </script>
+    <style type="text/css">
+        table{
+            width:430px;
+        }
+        td{
+            border:solid;
+            border-width:1px;
+            text-align:center;
+        }
+        Thead>tr>td{
+            font-weight:bold;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitle" Runat="Server">
     Character Creator
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <script>
+    </script>
             <div id="smalldiv" style="width:30%; float:left;">
                     Name<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                     <br />
-                    <br />
-                    Primary Statistic:
-                    <asp:Label ID="Label1" runat="server"></asp:Label>
+                    
+                    
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
+                            <br />
+                         Primary Statistic:<asp:Label ID="Label1" runat="server"></asp:Label>
                     <br />
                     <br />
                     <span onmouseover="agility()">AGI</span><br />
-                    <asp:Button ID="Button1" runat="server" Text="&lt;"  />
+                
+                    <asp:Button ID="Button1" runat="server" Text="&lt;" OnClick="Button1_Click"  />
                     <asp:TextBox ID="TextBox2" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
-                    <asp:Button ID="Button2" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button2" runat="server" Text="&gt;" OnClick="Button2_Click" />
+                            
                     <br />
                     <span onmouseover="appearance()">APP</span><br />
-                    <asp:Button ID="Button3" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox3" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button4" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button3" runat="server" Text="&lt;" OnClick="Button3_Click" />
+                    <asp:TextBox ID="TextBox3" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button4" runat="server" Text="&gt;" OnClick="Button4_Click" />
                     <br />
                     <span onmouseover="build()">BLD</span><br />
-                    <asp:Button ID="Button5" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox4" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button6" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button5" runat="server" Text="&lt;" OnClick="Button5_Click" />
+                    <asp:TextBox ID="TextBox4" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button6" runat="server" Text="&gt;" OnClick="Button6_Click" />
                     <br />
                     <span onmouseover="creativity()">CRE</span><br />
-                    <asp:Button ID="Button7" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox5" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button8" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button7" runat="server" Text="&lt;" OnClick="Button7_Click" />
+                    <asp:TextBox ID="TextBox5" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button8" runat="server" Text="&gt;" OnClick="Button8_Click" />
                     <br />
                     <span onmouseover="fitness()">FIT</span><br />
-                    <asp:Button ID="Button9" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox6" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button10" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button9" runat="server" Text="&lt;" OnClick="Button9_Click" />
+                    <asp:TextBox ID="TextBox6" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button10" runat="server" Text="&gt;" OnClick="Button10_Click" />
                     <br />
                     <span onmouseover="influence()">INF</span><br />
-                    <asp:Button ID="Button11" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox7" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button12" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button11" runat="server" Text="&lt;" OnClick="Button11_Click" />
+                    <asp:TextBox ID="TextBox7" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button12" runat="server" Text="&gt;" OnClick="Button12_Click" />
                     <br />
                     <span onmouseover="knowledge()">KNO</span><br />
-                    <asp:Button ID="Button13" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox8" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button14" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button13" runat="server" Text="&lt;" OnClick="Button13_Click" />
+                    <asp:TextBox ID="TextBox8" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button14" runat="server" Text="&gt;" OnClick="Button14_Click" />
                     <br />
                     <span onmouseover="perception()">PER</span><br />
-                    <asp:Button ID="Button15" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox9" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button16" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button15" runat="server" Text="&lt;" OnClick="Button15_Click" />
+                    <asp:TextBox ID="TextBox9" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button16" runat="server" Text="&gt;" OnClick="Button16_Click" />
                     <br />
                     <span onmouseover="psyche()">PSY</span><br />
-                    <asp:Button ID="Button17" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox10" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button18" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button17" runat="server" Text="&lt;" OnClick="Button17_Click" />
+                    <asp:TextBox ID="TextBox10" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button18" runat="server" Text="&gt;" OnClick="Button18_Click" />
                     <br />
                     <span onmouseover="willpower()">WIL</span><br />
-                    <asp:Button ID="Button19" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox11" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button20" runat="server" Text="&gt;" />
+                    <asp:Button ID="Button19" runat="server" Text="&lt;" OnClick="Button19_Click" />
+                    <asp:TextBox ID="TextBox11" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:Button ID="Button20" runat="server" Text="&gt;" OnClick="Button20_Click" />
                     <br />
                     <br />
+                            <asp:Button ID="Button48" runat="server" OnClick="Button48_Click" Text="Calculate Secondary" />
+                <br />
                     Secondary Statistic<br />
                     <br />
                     <span onmouseover="strength()">STR</span><br />
@@ -113,6 +132,9 @@ Character Creator
                     <span onmouseover="systemShock()" >SYSTEM SHOCK</span><br />
                     <asp:TextBox ID="TextBox20" runat="server" ReadOnly="True" Width="40px"></asp:TextBox>
                     <br />
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 
     <div id="description" style="width:60%; height:450px; float:left">
@@ -122,15 +144,16 @@ Character Creator
             
         </table>
     </div>
-     <div id="description2" style="width:60%; float:left">
+    <br />
+     <div id="description2" style=" width:60%; float:left">
         <h2>Description: Secondary Stats</h2>
         <p id="secondaryDescription">Hover over the Stat name in order to learn more about it. Note: FLESH WOUND, DEEP WOUND, INSTANT DEATH have the same description for obvious reasons</p>
          <table id="secondStatsTable">
             
         </table>
     </div>
-    <div style="clear:both">
-                    Skill, Perks and Flaws<br />
+    <div style="clear:both;">
+                    Skill, Perks and Flaws:<br />
                     <br />
                     SKILLS<br />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -206,11 +229,14 @@ Character Creator
             
                     
                     <br />
-                    PERKS<br />         <asp:ListBox ID="ListBox2" runat="server"><asp:ListItem>Accelerated Healing</asp:ListItem>
+                    PERKS<br />         
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+        <asp:ListBox ID="ListBox2" runat="server"><asp:ListItem>Accelerated Healing</asp:ListItem>
                         <asp:ListItem>Acute Sense (Specific)</asp:ListItem>
                         <asp:ListItem>Smell</asp:ListItem>
                         <asp:ListItem>Taste</asp:ListItem>
-                        <asp:ListItem>Ambidtextrous</asp:ListItem>
+                        <asp:ListItem>Ambidextrous</asp:ListItem>
                         <asp:ListItem>Animal Companion</asp:ListItem>
                         <asp:ListItem>Animal Kinship</asp:ListItem>
                         <asp:ListItem>Authority</asp:ListItem>
@@ -240,12 +266,16 @@ Character Creator
                         <asp:ListItem>Thick-Skinned</asp:ListItem>
                         <asp:ListItem>Wealthy</asp:ListItem>
                     </asp:ListBox>
-                    <asp:Button ID="Button37" runat="server" Text="&lt;&lt;" />
-                    <asp:Button ID="Button38" runat="server" Text="&gt;&gt;" />
+                    <asp:Button ID="Button37" runat="server" Text="Add" OnClick="Button37_Click" />
+                    <asp:Button ID="Button38" runat="server" Text="Remove" OnClick="Button38_Click" />
                     <asp:ListBox ID="ListBox5" runat="server"></asp:ListBox>
                     <br />
+                            </ContentTemplate>
+            </asp:UpdatePanel>
                     FLAWS<br />
-                    <asp:ListBox ID="ListBox3" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                    <asp:ListBox ID="ListBox3" runat="server" OnSelectedIndexChanged="ListBox3_SelectedIndexChanged">
                         <asp:ListItem>Addiction</asp:ListItem>
                         <asp:ListItem>Age</asp:ListItem>
                         <asp:ListItem>Amnesiac</asp:ListItem>
@@ -287,10 +317,12 @@ Character Creator
                         <asp:ListItem>Wanted</asp:ListItem>
                         <asp:ListItem>Weak Immune System</asp:ListItem>
                     </asp:ListBox>
-                    <asp:Button ID="Button39" runat="server" Text="&lt;&lt;" />
-                    <asp:Button ID="Button40" runat="server" Text="&gt;&gt;" />
+
+                    <asp:Button ID="Button39" runat="server" Text="Add" OnClick="Button39_Click" />
+                    <asp:Button ID="Button40" runat="server" Text="Remove" OnClick="Button40_Click" />
                     <asp:ListBox ID="ListBox6" runat="server"></asp:ListBox>
-                
+                </ContentTemplate>
+            </asp:UpdatePanel>
                     <br />
                     <br />
                     Miscellaneous<br />

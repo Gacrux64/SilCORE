@@ -11,6 +11,7 @@ function agility() {
     hcell1.innerHTML = "AGI_Rating";
     hcell2.innerHTML = "Equivalence";
 
+
     var body1 = table.createTBody();
     var firstrow = body1.insertRow(0);
     var fcell1 = firstrow.insertCell(0);

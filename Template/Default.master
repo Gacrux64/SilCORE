@@ -85,9 +85,12 @@
                         <asp:Label ID="LabelLoginMes" runat="server" Text=""></asp:Label>
                     </div>
                     <div id="loggedIn" runat="server" visible="false">
-                        <asp:Label ID="LabelLoggedIn" runat="server" Text="You are logged in:"></asp:Label>
+                        <asp:Label ID="LabelLoggedIn" runat="server" Text="Logged in as:"></asp:Label>
                         <br />
                         <asp:Label ID="LabelUsername" runat="server" Text=""></asp:Label>
+                        <br />
+                        <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="LinkButtonUser_Click">User Page</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButtonLogout" runat="server" OnClick="LinkButtonLogout_Click">Log out</asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -101,8 +104,7 @@
                     <asp:ContentPlaceHolder id="ContentPlaceHolderMainBox" runat="server">
         
                     </asp:ContentPlaceHolder>
-            </div>
-            
+                </div> 
             <footer style="font-size:0.75em">
              &copy; Silcore
             </footer>

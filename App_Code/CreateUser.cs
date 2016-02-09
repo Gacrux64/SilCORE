@@ -30,12 +30,12 @@ namespace NewUser
                 }
                 else
                 {
-                    MailClass.NewErrorMail("Undefined", "The resource has been successfully entered, but their initial login e-mail failed to be sent. Please use the Per Diem Tools application to generate and send them a new one.", "SendEMail Function");
+                    MailClass.NewErrorMail("Undefined", "The resource has been successfully entered, but their initial login e-mail failed to be sent.", "SendEMail Function");
                 }
             }
             else
             {
-                MailClass.NewErrorMail("Undefined", "The Module to load a V1 resource into the Per Diem system has failed in some way.", "EnterUser Function");
+                MailClass.NewErrorMail("Undefined", "System has failed in some way.", "EnterUser Function");
             }
 
             return status;

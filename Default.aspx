@@ -9,42 +9,73 @@
     Updates
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
-    <h3>Article 1</h3>
-<p>
-Now this is where the real content will be added:<br>
--awesome stuff<br>
--awesome filler text<br>
--awesome text fillers everywhere<br>
-Why?<br>
-because we need to fill the page somehow<br>
-yeaaaaa...<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste</p>
-<hr>
-<h3>Article 2</h3>
-<p>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste</p>
-
-<br>
-<hr>
-<h3>Article 3</h3>
-<p>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste<br>
-copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste copy/paste</p>
-
-<br>
+    <asp:listview ID="ListViewNewsPosts" runat="server" DataSourceID="SqlDataSourceNews">
+        <AlternatingItemTemplate>
+            <span style="">
+            Posted on:
+            <asp:Label ID="UPDATE_POST_DATELabel" runat="server" Text='<%# Eval("UPDATE_POST_DATE", "{0:d}") %>'></asp:Label>
+            <br />
+            <asp:Label ID="UPDATE_POST_NEWSLabel" runat="server" Text='<%# Eval("UPDATE_POST_NEWS") %>'></asp:Label>
+            <br />
+            <br />
+            </span>
+        </AlternatingItemTemplate>
+        <EditItemTemplate>
+            <span style="">UPDATE_POST_DATE:
+            <asp:TextBox ID="UPDATE_POST_DATETextBox" runat="server" Text='<%# Bind("UPDATE_POST_DATE") %>' />
+            <br />
+            UPDATE_POST_NEWS:
+            <asp:TextBox ID="UPDATE_POST_NEWSTextBox" runat="server" Text='<%# Bind("UPDATE_POST_NEWS") %>' />
+            <br />
+            <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
+            <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+            <br /><br /></span>
+        </EditItemTemplate>
+        <EmptyDataTemplate>
+            <span>No news has been posted yet.</span>
+        </EmptyDataTemplate>
+        <InsertItemTemplate>
+            <span style="">UPDATE_POST_DATE:
+            <asp:TextBox ID="UPDATE_POST_DATETextBox" runat="server" Text='<%# Bind("UPDATE_POST_DATE") %>' />
+            <br />UPDATE_POST_NEWS:
+            <asp:TextBox ID="UPDATE_POST_NEWSTextBox" runat="server" Text='<%# Bind("UPDATE_POST_NEWS") %>' />
+            <br />
+            <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
+            <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
+            <br /><br /></span>
+        </InsertItemTemplate>
+        <ItemTemplate>
+            <span style="">
+            Posted on:
+            <asp:Label ID="UPDATE_POST_DATELabel" runat="server" Text='<%# Eval("UPDATE_POST_DATE", "{0:d}") %>'></asp:Label>
+            <br />
+            <asp:Label ID="UPDATE_POST_NEWSLabel" runat="server" Text='<%# Eval("UPDATE_POST_NEWS") %>'></asp:Label>
+            <br />
+            <br />
+            </span>
+        </ItemTemplate>
+        <LayoutTemplate>
+            <div id="itemPlaceholderContainer" runat="server" style="">
+                <span runat="server" id="itemPlaceholder" />
+            </div>
+            <div style="">
+                <asp:DataPager PageSize="3" ID="DataPager1" runat="server">
+                    <Fields>
+                        <asp:NextPreviousPagerField ButtonType="link" ShowFirstPageButton="True" ShowLastPageButton="True" FirstPageText="Newest" LastPageText="Oldest" />
+                    </Fields>
+                </asp:DataPager>
+            </div>
+        </LayoutTemplate>
+        <SelectedItemTemplate>
+            <span style="">UPDATE_POST_DATE:
+            <asp:Label ID="UPDATE_POST_DATELabel" runat="server" Text='<%# Eval("UPDATE_POST_DATE") %>' />
+            <br />
+            UPDATE_POST_NEWS:
+            <asp:Label ID="UPDATE_POST_NEWSLabel" runat="server" Text='<%# Eval("UPDATE_POST_NEWS") %>' />
+            <br />
+            <br /></span>
+        </SelectedItemTemplate>
+    </asp:listview>
+    <asp:SqlDataSource ID="SqlDataSourceNews" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [UPDATE_POST_DATE], [UPDATE_POST_NEWS] FROM [UPDATE_POST]"></asp:SqlDataSource>
 </asp:Content>
 
