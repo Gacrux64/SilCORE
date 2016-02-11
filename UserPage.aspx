@@ -13,8 +13,8 @@
         <asp:label ID="AccountCharacters" runat="server" text="Your Characters:"></asp:label>
         <br />
         <br />
-        <asp:dropdownlist ID="DDLCharacterList" runat="server" Enabled="False" DataSourceID="SQLUserCharacters" DataTextField="CHARACTER_NAME" DataValueField="CHARACTER_ID">
-            <asp:ListItem>You have no Characters</asp:ListItem>
+        <asp:dropdownlist ID="DDLCharacterList" runat="server" Enabled="False" DataSourceID="SQLUserCharacters" DataTextField="CHARACTER_NAME" DataValueField="CHARACTER_ID" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="DDLCharacterList_SelectedIndexChanged">
+            <asp:ListItem>Select a character</asp:ListItem>
         </asp:dropdownlist>
         <asp:sqldatasource id="SQLUserCharacters" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [CHARACTER_ID], [CHARACTER_NAME], [CHARACTER_AGI], [CHARACTER_APP], [CHARACTER_BLD], [CHARACTER_CRE], [CHARACTER_FIT], [CHARACTER_INF], [CHARACTER_KNO], [CHARACTER_PER], [CHARACTER_PSY], [CHARACTER_WIL], [CHARACTER_EMERGENCY_DICE], [CHARACTER_XP] FROM [CHARACTER] WHERE ([CHARACTER_USER_ID] = @CHARACTER_USER_ID)">
             <SelectParameters>
@@ -23,7 +23,7 @@
         </asp:sqldatasource>
         <br />
         <br />
-        <asp:button ID="NewCharButton" runat="server" text="Create New" />
+        <asp:button ID="NewCharButton" runat="server" text="Create New" OnClick="NewCharButton_Click" />
         <br />
         <br />
         <div runat="server" id="AdminPanel">
@@ -34,32 +34,33 @@
             <asp:button ID="MakeAdminButton" runat="server" text="Set Administrator" OnClick="MakeAdminButton_Click" />
             <br />
             <div id="SetAdminDiv" runat="server" visible="false">
-                <asp:label ID="UserAdminLevelMessage" runat="server" text="Sample Message"></asp:label>
+                <asp:label ID="UserAdminLevelMessage" runat="server" text=""></asp:label>
                 <br />
                 <asp:label ID="LabelUsers" runat="server" text="User: "></asp:label>
                 <br />
-                <asp:dropdownlist ID="DDLUsers" runat="server"></asp:dropdownlist>
-                <asp:sqldatasource id="SQLUsers" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [USER_LOGIN], [USER_ADMIN], [USER_ID] FROM [USER_INFO] WHERE ([USER_ID] = @USER_ID)">
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="DDLUsers" Name="USER_ID" PropertyName="SelectedValue" Type="Int32" />
-                    </SelectParameters>
+                <asp:dropdownlist ID="DDLUsers" runat="server" DataSourceID="SQLUsers" DataTextField="USER_LOGIN" DataValueField="USER_ID" AppendDataBoundItems="True" AutoPostBack="True" OnSelectedIndexChanged="DDLUsers_SelectedIndexChanged">
+                    <asp:ListItem>Select a user</asp:ListItem>
+                </asp:dropdownlist>
+                <asp:sqldatasource id="SQLUsers" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [USER_ID], [USER_LOGIN], [USER_ADMIN] FROM [USER_INFO]">
                 </asp:sqldatasource>
                 <br />
-                <asp:button id="UserAdminDecrease" runat="server" text="<" />
-                <asp:textbox id="UserAdminLevel" runat="server" Columns="2" Enabled="False" ></asp:textbox>
-                <asp:button id="UserAdminIncrease" runat="server" text=">" />
+                <asp:label id="LableUserAdmin" runat="server" width="89" text="Admin: "></asp:label>
+                <asp:checkbox id="ChecboxUserAdmin" runat="server"></asp:checkbox>
+                <br />
+                <asp:label id="LabelUserNews" runat="server" text="News Posts: "></asp:label>
+                <asp:checkbox id="CheckboxNewsPosts" runat="server" Enabled="False"></asp:checkbox>
                 <br />
                 <br />
                 <asp:label id="UserAdminLevelVerify" runat="server" text="Are you sure?"></asp:label>
                 <br />
-                <asp:button id="UserAdminLevelSure" runat="server" text="Yes" />
-                <asp:button id="UserAdminLevelConfirm" runat="server" text="Change" Enabled="false" />
+                <asp:button id="UserAdminLevelSure" runat="server" text="Yes" OnClick="UserAdminLevelSure_Click" />
+                <asp:button id="UserAdminLevelConfirm" runat="server" text="Change" Enabled="false" OnClick="UserAdminLevelConfirm_Click" />
             </div>
             <br id="SetAdminBr" runat="server" visible="false"/>
             <asp:button ID="NewsPostButton" runat="server" text="Make News Post" Width="124px" OnClick="NewsPostButton_Click" />
             <br />
             <div id="MakeNewsPostDiv" runat="server" visible="false">
-                <asp:label id="PostMessage" runat="server" text="Sample Message"></asp:label>
+                <asp:label id="PostMessage" runat="server" text=""></asp:label>
                 <br />
                 <asp:label ID="PostTitle" runat="server" text="Title:"></asp:label>
                 <br />
@@ -116,8 +117,16 @@
         <br />
         <asp:label ID="Experience" runat="server" text="XPs: "></asp:label>
         <br />
-        <asp:button ID="ButtonLoad" runat="server" text="Load" />
-        <asp:button ID="ButtonDelete" runat="server" text="Delete" />
+        <asp:LinkButton ID="ButtonDetail" runat="server" text="Detailed View" />
+        <br />
+        <br />
+        <asp:button ID="ButtonDelete" runat="server" text="Delete" OnClick="ButtonDelete_Click" Visible="false" />
+        <div id="DelConfirmDiv" runat="server" visible="false">
+            <asp:Label ID="LableDelConfirmMes" runat="server" Text="Are you sure?"></asp:Label>
+            <br />
+            <asp:button ID="ButtonDeleteConfirm" runat="server" text="Confirm" Enabled="false" OnClick="ButtonDeleteConfirm_Click" />
+            <asp:button ID="ButtonDeleteCancel" runat="server" text="cancel" OnClick="ButtonDeleteCancel_Click" />
+        </div>
     </div>
     <br style="clear:both;" />
 </asp:Content>
