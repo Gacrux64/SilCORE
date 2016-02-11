@@ -17,7 +17,7 @@
     <script type="text/javascript" src="../JS/Nav.js"></script>
     <script type="text/javascript" src="../JS/Login.js"></script>
 </head>
-<body>
+<body onload="drawLines()">
     <form id="form1" runat="server">
     <div>
         <div id="box">

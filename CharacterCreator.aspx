@@ -16,6 +16,9 @@ Character Creator
         Thead>tr>td{
             font-weight:bold;
         }
+        #flawsDiv1 {
+            width: 138px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitle" Runat="Server">
@@ -24,11 +27,26 @@ Character Creator
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <script>
+       
+            
     </script>
             <div id="smalldiv" style="width:30%; float:left;">
-                    Name<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    Name: <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                     <br />
-                    
+                    <br />
+                    GAME TYPE:
+                    <asp:DropDownList ID="DropDownList18" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList18_SelectedIndexChanged">
+                        <asp:ListItem Value="10">Type 1</asp:ListItem>
+                        <asp:ListItem Value="30">Type 2</asp:ListItem>
+                        <asp:ListItem Value="50">Type 3</asp:ListItem>
+                        <asp:ListItem Value="0">Custom</asp:ListItem>
+                    </asp:DropDownList>
+                    <br />
+                    <div runat="server" visible="false" ID="customgame">
+
+                       CP: <asp:TextBox type="number" ID="TextBox23" runat="server" OnTextChanged="TextBox23_TextChanged" AutoPostBack="True"></asp:TextBox>
+
+                    </div>
                     
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
@@ -89,7 +107,6 @@ Character Creator
                     <asp:Button ID="Button20" runat="server" Text="&gt;" OnClick="Button20_Click" />
                     <br />
                     <br />
-                            <asp:Button ID="Button48" runat="server" OnClick="Button48_Click" Text="Calculate Secondary" />
                 <br />
                     Secondary Statistic<br />
                     <br />
@@ -146,19 +163,23 @@ Character Creator
     </div>
     <br />
      <div id="description2" style=" width:60%; float:left">
-        <h2>Description: Secondary Stats</h2>
+        <h2>&nbsp;</h2>
+         <h2>&nbsp;Description: Secondary Stats</h2>
         <p id="secondaryDescription">Hover over the Stat name in order to learn more about it. Note: FLESH WOUND, DEEP WOUND, INSTANT DEATH have the same description for obvious reasons</p>
          <table id="secondStatsTable">
             
         </table>
     </div>
+    <br />
+    <br />
     <div style="clear:both;">
-                    Skill, Perks and Flaws:<br />
+                    <br />
+                    Skill, Perks and Flaws<br />
                     <br />
                     SKILLS<br />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                         <ContentTemplate>
-                    <asp:ListBox ID="ListBox1" style="vertical-align:top;" runat="server" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged">
+                    <asp:ListBox ID="ListBox1" style="vertical-align:top;" runat="server" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" Width="169px">
                         <asp:ListItem>Animal Handling</asp:ListItem>
                         <asp:ListItem>Archery</asp:ListItem>
                         <asp:ListItem>Athletics</asp:ListItem>
@@ -230,9 +251,10 @@ Character Creator
                     
                     <br />
                     PERKS<br />         
-        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server" >
                         <ContentTemplate>
-        <asp:ListBox ID="ListBox2" runat="server"><asp:ListItem>Accelerated Healing</asp:ListItem>
+        <asp:ListBox ID="ListBox2" runat="server" OnSelectedIndexChanged="ListBox2_SelectedIndexChanged" AutoPostBack="True" Width="169px">
+                        <asp:ListItem>Accelerated Healing</asp:ListItem>
                         <asp:ListItem>Acute Sense (Specific)</asp:ListItem>
                         <asp:ListItem>Smell</asp:ListItem>
                         <asp:ListItem>Taste</asp:ListItem>
@@ -241,7 +263,8 @@ Character Creator
                         <asp:ListItem>Animal Kinship</asp:ListItem>
                         <asp:ListItem>Authority</asp:ListItem>
                         <asp:ListItem>Common Sense</asp:ListItem>
-                        <asp:ListItem>Connections</asp:ListItem>
+                        <asp:ListItem>Connections (Allies)</asp:ListItem>
+                        <asp:ListItem>Connections (Contacts)</asp:ListItem>
                         <asp:ListItem>Double Jointed</asp:ListItem>
                         <asp:ListItem>Fake Identity</asp:ListItem>
                         <asp:ListItem>Famous</asp:ListItem>
@@ -262,10 +285,150 @@ Character Creator
                         <asp:ListItem>Sense of Direction</asp:ListItem>
                         <asp:ListItem>Sense of Time</asp:ListItem>
                         <asp:ListItem>Strong Immune System</asp:ListItem>
-                        <asp:ListItem>Subordinates</asp:ListItem>
                         <asp:ListItem>Thick-Skinned</asp:ListItem>
                         <asp:ListItem>Wealthy</asp:ListItem>
                     </asp:ListBox>
+                            <div runat="server"  visible="true" id="perksDiv" style="vertical-align:top; float:right; position:relative; right:470px">
+                                <div runat="server" visible="false" id="perksDiv1">
+                                &nbsp;<asp:DropDownList ID="DropDownList3" runat="server" Width="104px" AppendDataBoundItems="True">
+                                    <asp:ListItem>Hearing</asp:ListItem>
+                                    <asp:ListItem>Sight</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv2">
+                                &nbsp;<asp:DropDownList ID="DropDownList4" runat="server" Width="104px">
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                                        <asp:ListItem>6</asp:ListItem>
+                                        <asp:ListItem>7</asp:ListItem>
+                                        <asp:ListItem>8</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv3">
+                                &nbsp;<asp:DropDownList ID="DropDownList5" runat="server" Width="104px">
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                              
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv4">
+                                &nbsp;<asp:DropDownList ID="DropDownList6" runat="server" Width="104px">
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                                        <asp:ListItem>6</asp:ListItem>
+                                        <asp:ListItem>7</asp:ListItem>
+
+                                      </asp:DropDownList>
+                              </div>
+                                <div runat="server" visible="false" id="perksDiv5">
+                              
+                                &nbsp;<asp:DropDownList ID="DropDownList7" runat="server" Width="104px">
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                              
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv6">
+                                &nbsp;<asp:DropDownList ID="DropDownList8" runat="server" Width="104px">
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                                        <asp:ListItem>6</asp:ListItem>
+                                        <asp:ListItem>7</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv7">
+                                &nbsp;<asp:DropDownList ID="DropDownList9" runat="server" Width="104px">
+                                        <asp:ListItem Value="1">20 000</asp:ListItem>
+                                        <asp:ListItem Value="2">50 000</asp:ListItem>
+                                        <asp:ListItem Value="3">75 000</asp:ListItem>
+                                        <asp:ListItem Value="4">150 000</asp:ListItem>
+                                        <asp:ListItem Value="5">500 000</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                 <div runat="server" visible="false" id="perksDiv8">
+                                &nbsp;<asp:DropDownList ID="DropDownList10" runat="server" Width="104px">
+                                       
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                                        <asp:ListItem>6</asp:ListItem>
+                                      
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv9">
+                                &nbsp;<asp:DropDownList ID="DropDownList11" runat="server" Width="104px">
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv10">
+                                &nbsp;<asp:DropDownList ID="DropDownList12" runat="server" Width="104px" >
+                                        <asp:ListItem Value="2">Enlisted/Member</asp:ListItem>
+                                        <asp:ListItem Value="4">Junior Nco/Veteran Member</asp:ListItem>
+                                        <asp:ListItem Value="8">Senior Nco/Assistant-Director</asp:ListItem>
+                                        <asp:ListItem Value="12">Senior Officer/Director</asp:ListItem>
+                                </asp:DropDownList>
+                                    </div>
+                                    <div runat="server" visible="false" id="perksDiv105">
+                                &nbsp;<asp:DropDownList ID="DropDownList16" runat="server" Width="104px">
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        <asp:ListItem>4</asp:ListItem>
+                                        <asp:ListItem>5</asp:ListItem>
+                                        <asp:ListItem>6</asp:ListItem>
+                                        <asp:ListItem>7</asp:ListItem>
+                                        <asp:ListItem>8</asp:ListItem>
+                                        <asp:ListItem>9</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv11" style="padding-left:5px;">
+                                &nbsp;<asp:DropDownList ID="DropDownList13" runat="server" Width="104px">
+                                        <asp:ListItem Value="2">2D</asp:ListItem>
+                                        <asp:ListItem Value="5">3D</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="perksDiv12">
+                                
+                                <asp:DropDownList Visible="false" ID="DropDownList14" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="3">1</asp:ListItem>
+                                        <asp:ListItem Value="6">2</asp:ListItem>
+                                        <asp:ListItem Value="9">3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                              <asp:DropDownList Visible="false" ID="DropDownList15" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem>1</asp:ListItem>
+                                        <asp:ListItem>2</asp:ListItem>
+                                        <asp:ListItem>3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                   <br />
+                                 <asp:DropDownList ID="DropDownList17" runat="server" Width="104px" AutoPostBack="True" OnSelectedIndexChanged="DropDownList17_SelectedIndexChanged">
+                                        <asp:ListItem>Choose</asp:ListItem>
+                                        <asp:ListItem>Renewable</asp:ListItem>
+                                        <asp:ListItem>Non-Renewable</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <br />
+                                    
+                                </div>
+                            </div>
                     <asp:Button ID="Button37" runat="server" Text="Add" OnClick="Button37_Click" />
                     <asp:Button ID="Button38" runat="server" Text="Remove" OnClick="Button38_Click" />
                     <asp:ListBox ID="ListBox5" runat="server"></asp:ListBox>
@@ -275,7 +438,7 @@ Character Creator
                     FLAWS<br />
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
-                    <asp:ListBox ID="ListBox3" runat="server" OnSelectedIndexChanged="ListBox3_SelectedIndexChanged">
+                    <asp:ListBox ID="ListBox3" runat="server" OnSelectedIndexChanged="ListBox3_SelectedIndexChanged" Width="169px" AutoPostBack="True">
                         <asp:ListItem>Addiction</asp:ListItem>
                         <asp:ListItem>Age</asp:ListItem>
                         <asp:ListItem>Amnesiac</asp:ListItem>
@@ -288,7 +451,6 @@ Character Creator
                         <asp:ListItem>Curse</asp:ListItem>
                         <asp:ListItem>Debt</asp:ListItem>
                         <asp:ListItem>Dedicated</asp:ListItem>
-                        <asp:ListItem>Dependent</asp:ListItem>
                         <asp:ListItem>Destitute</asp:ListItem>
                         <asp:ListItem>Flashbacks</asp:ListItem>
                         <asp:ListItem>Goal</asp:ListItem>
@@ -299,7 +461,6 @@ Character Creator
                         <asp:ListItem>Liar</asp:ListItem>
                         <asp:ListItem>Mechanical Inaptitude</asp:ListItem>
                         <asp:ListItem>Motion Sickness</asp:ListItem>
-                        <asp:ListItem>Nemesis</asp:ListItem>
                         <asp:ListItem>Obligations</asp:ListItem>
                         <asp:ListItem>One-Armed</asp:ListItem>
                         <asp:ListItem>Paranoid</asp:ListItem>
@@ -317,7 +478,203 @@ Character Creator
                         <asp:ListItem>Wanted</asp:ListItem>
                         <asp:ListItem>Weak Immune System</asp:ListItem>
                     </asp:ListBox>
+                            <div runat="server" id="flawsDiv" style="vertical-align:top; float:right; position:relative; right:470px">
+                                <div runat="server" visible="false" id="flawsDiv1" style="position:absolute;right:-1px;">
 
+                                    <asp:TextBox ID="TextBox24" runat="server" onclick="this.value=''; this.style.color='black'" ForeColor="Gray" Width="104px">Drugs</asp:TextBox>
+                                    <br />
+                                    <asp:TextBox  ID="TextBox25" runat="server" onclick="this.type='number'; this.min='3'; this.style.color='black'" ForeColor="Gray" Width="104px">Rating</asp:TextBox>
+
+                                </div>
+                                <div runat="server" visible="false" id="age">
+                                    <asp:DropDownList ID="DropDownList19" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-2">Young</asp:ListItem>
+                                        <asp:ListItem Value="-4">Old</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="belief">
+                                    <asp:DropDownList  ID="DropDownList20" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="honor">
+                                    <asp:DropDownList ID="DropDownList21" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        <asp:ListItem Value="-4">4</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" Visible="false" id="criminal">
+                                    <asp:DropDownList ID="DropDownList22" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" Visible="false" id="curse">
+                                    <asp:DropDownList ID="DropDownList23" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        <asp:ListItem Value="-4">4</asp:ListItem>
+                                        <asp:ListItem Value="-5">5</asp:ListItem>
+                                        <asp:ListItem Value="-6">6</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="debt">
+                                    <asp:DropDownList ID="DropDownList24" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">20 000</asp:ListItem>
+                                        <asp:ListItem Value="-2">50 000</asp:ListItem>
+                                        <asp:ListItem Value="-3">75 000</asp:ListItem>
+                                        <asp:ListItem Value="-4">150 000</asp:ListItem>
+                                        <asp:ListItem Value="-5">500 000</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="dedicated">
+                                    <asp:DropDownList ID="DropDownList25" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="infamous">
+                                    <asp:DropDownList ID="DropDownList26" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        <asp:ListItem Value="-4">4</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="lame">
+                                    <asp:DropDownList ID="DropDownList27" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-2">Removable</asp:ListItem>
+                                        <asp:ListItem Value="-6">Permanent</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="liar">
+                                    <asp:DropDownList ID="DropDownList28" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">Liar</asp:ListItem>
+                                        <asp:ListItem Value="-5">Mythomaniac</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="motionsickness">
+                                    <asp:TextBox  ID="TextBox26" runat="server" onclick="this.type='number'; this.style.color='black'" ForeColor="Gray" Width="104px">Rating</asp:TextBox>
+
+                                </div>
+                                <div runat="server" visible="false" id="obligation">
+                                    <asp:DropDownList ID="DropDownList30" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="onearmed">
+                                    <asp:DropDownList ID="DropDownList31" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-2">Temporary</asp:ListItem>
+                                        <asp:ListItem Value="-5">Permanent</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="phobia">
+                                    <asp:DropDownList ID="DropDownList32" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-2">Mild</asp:ListItem>
+                                        <asp:ListItem Value="-4">Severe</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="poorsense" style="position:absolute;right:-1px;">
+                                    <asp:DropDownList ID="DropDownList33" runat="server" Width="104px" OnSelectedIndexChanged="DropDownList33_SelectedIndexChanged" AutoPostBack="True">
+                                        
+                                        <asp:ListItem>Hearing</asp:ListItem>
+                                        <asp:ListItem>Sight</asp:ListItem>
+                                        <asp:ListItem>Smell/Taste</asp:ListItem>
+                                        <asp:ListItem>Blind/Deaf</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                    <br />
+                                    <asp:DropDownList Visible="false" ID="DropDownList34" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem>Temporary Blind</asp:ListItem>
+                                        <asp:ListItem>Temporary Deaf</asp:ListItem>
+                                        <asp:ListItem>Permanently Blind</asp:ListItem>
+                                        <asp:ListItem>Permanently Deaf</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="quirk">
+                                    <asp:DropDownList ID="DropDownList35" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="secret">
+                                    <asp:DropDownList ID="DropDownList36" runat="server" Width="104px">
+                             
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="sick">
+                                    <asp:DropDownList ID="DropDownList37" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        <asp:ListItem Value="-4">4</asp:ListItem>
+                                        <asp:ListItem Value="-5">5</asp:ListItem>
+                                        <asp:ListItem Value="-6">6</asp:ListItem>
+                                        <asp:ListItem Value="-7">7</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="socialstigma">
+                                   <asp:DropDownList ID="DropDownList38" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+                                <div runat="server" visible="false" id="wanted">
+                                    <asp:DropDownList ID="DropDownList39" runat="server" Width="104px">
+                                        
+                                        <asp:ListItem Value="-1">1</asp:ListItem>
+                                        <asp:ListItem Value="-2">2</asp:ListItem>
+                                        <asp:ListItem Value="-3">3</asp:ListItem>
+                                        <asp:ListItem Value="-4">4</asp:ListItem>
+                                        <asp:ListItem Value="-5">5</asp:ListItem>
+                                        
+                                </asp:DropDownList>
+                                </div>
+
+                            </div>
                     <asp:Button ID="Button39" runat="server" Text="Add" OnClick="Button39_Click" />
                     <asp:Button ID="Button40" runat="server" Text="Remove" OnClick="Button40_Click" />
                     <asp:ListBox ID="ListBox6" runat="server"></asp:ListBox>
@@ -327,21 +684,17 @@ Character Creator
                     <br />
                     Miscellaneous<br />
                     <br />
-                    EMERGENCY DICE<br />
-                    <asp:Button ID="Button41" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox21" runat="server" ReadOnly="True" Width="40px"></asp:TextBox>
-                    <asp:Button ID="Button42" runat="server" Text="&gt;" />
+                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                        <ContentTemplate>
+                            EMERGENCY DICE<br />
+                            <asp:TextBox ID="TextBox21" runat="server" ReadOnly="True" Width="40px"></asp:TextBox>
+                            <asp:Button ID="Button42" runat="server" OnClick="Button42_Click" Text="Convert to Exp" />
                     <br />
-                    EXP<br />
-                    <asp:Button ID="Button43" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox22" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button44" runat="server" Text="&gt;" />
-                    <br />
-                    GAME TYPE<br />
-                    <asp:Button ID="Button45" runat="server" Text="&lt;" />
-                    <asp:TextBox ID="TextBox23" runat="server" Width="40px" ReadOnly="True"></asp:TextBox>
-                    <asp:Button ID="Button46" runat="server" Text="&gt;" />
-                    <br />
+                            EXP<br />
+                            <asp:TextBox ID="TextBox22" runat="server" Height="22px" ReadOnly="True" Width="40px">0</asp:TextBox>
+                            <asp:Button ID="Button41" runat="server" Text="Convert to Dice" OnClick="Button41_Click" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <br />
                     <asp:Button ID="Button47" runat="server" Text="Submit" />
                     <br />
