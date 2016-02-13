@@ -19,6 +19,7 @@ public partial class Template_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             number = 10;
+            secondaryStats();
         }
         TextBox21.Text = number.ToString(); 
     }
@@ -303,7 +304,7 @@ public partial class Template_Default : System.Web.UI.Page
            
         }
 
-        if (perkadd != "")
+        if (perkadd != "" && number>=value)
         {
             number = number - value;
             Label1.Text = number.ToString();
@@ -622,10 +623,13 @@ public partial class Template_Default : System.Web.UI.Page
     {
         string item = ListBox6.SelectedItem.Text;
         int removevalue = Int32.Parse(ListBox6.SelectedItem.Value);
-        number = number + removevalue;
-        Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
-        ListBox6.Items.Remove(ListBox6.SelectedItem);
+        int checkvalue = (-removevalue);
+        if (number >= checkvalue) {
+            number = number + removevalue;
+            Label1.Text = number.ToString();
+            TextBox21.Text = number.ToString();
+            ListBox6.Items.Remove(ListBox6.SelectedItem);
+        }
     }
     protected void ListBox3_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -808,6 +812,7 @@ public partial class Template_Default : System.Web.UI.Page
      
         TextBox21.Text = number.ToString();
         TextBox2.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -815,6 +820,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox2.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button4_Click(object sender, EventArgs e)
     {
@@ -822,6 +828,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox3.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
@@ -829,6 +836,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox3.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button6_Click(object sender, EventArgs e)
     {
@@ -841,6 +849,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox4.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
@@ -853,6 +862,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox4.Text = num.ToString();
+        secondaryStats();
     }
    
     protected void Button8_Click(object sender, EventArgs e)
@@ -861,6 +871,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox5.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
@@ -868,6 +879,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox5.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
@@ -875,6 +887,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox6.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
@@ -882,6 +895,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox6.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button12_Click(object sender, EventArgs e)
     {
@@ -889,6 +903,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox7.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button11_Click(object sender, EventArgs e)
     {
@@ -896,6 +911,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox7.Text = num.ToString();
         TextBox21.Text = number.ToString();
+        secondaryStats();
     }
     protected void Button14_Click(object sender, EventArgs e)
     {
@@ -903,6 +919,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox8.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button13_Click(object sender, EventArgs e)
     {
@@ -910,27 +927,34 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox8.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
         int num = add(TextBox9.Text);
+        secondaryStats();
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox9.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button15_Click(object sender, EventArgs e)
     {
         int num = remove(TextBox9.Text);
+        secondaryStats();
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox9.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button18_Click(object sender, EventArgs e)
     {
         int num = add(TextBox10.Text);
+        secondaryStats();
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox10.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
@@ -938,6 +962,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox10.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button20_Click(object sender, EventArgs e)
     {
@@ -945,6 +970,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox11.Text = num.ToString();
+        secondaryStats();
     }
     protected void Button19_Click(object sender, EventArgs e)
     {
@@ -952,6 +978,7 @@ public partial class Template_Default : System.Web.UI.Page
         Label1.Text = number.ToString();
         TextBox21.Text = number.ToString();
         TextBox11.Text = num.ToString();
+        secondaryStats();
     }
     protected int add(string textNum)
     {
@@ -961,7 +988,7 @@ public partial class Template_Default : System.Web.UI.Page
             num = num + 1;
             number = number - 1;
         }
-        secondaryStats();
+        
         return num;
     }
     protected int remove(string textNum)
@@ -972,7 +999,7 @@ public partial class Template_Default : System.Web.UI.Page
             num = num - 1;
             number = number + 1;
         }
-        secondaryStats();
+        
         return num;
     }
     protected void secondaryStats()
@@ -1170,6 +1197,7 @@ public partial class Template_Default : System.Web.UI.Page
         number = Int32.Parse(DropDownList18.SelectedItem.Value);
         dependentValue = Int32.Parse(DropDownList18.SelectedItem.Value);
         reset();
+        secondaryStats();
         if (DropDownList18.SelectedItem.Text.Equals("Custom"))
         {
             customgame.Visible = true;
