@@ -11,4 +11,14 @@ public partial class Template_Default : System.Web.UI.Page
     {
 
     }
+
+    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+    {
+        Label1.Text = Calendar1.SelectedDate.Date.ToString("MM/dd/yyyy");
+    }
+
+    protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+    {
+        Label2.Text = Calendar2.SelectedDate.Date.ToString("MM/dd/yyyy");
+    }
 }

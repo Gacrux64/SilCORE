@@ -985,8 +985,16 @@ public partial class Template_Default : System.Web.UI.Page
         int num = Int32.Parse(textNum);
         if (num < 3 && number > 0)
         {
+            if (num.Equals(1) || num.Equals(2) || num.Equals(-2) || num.Equals(-3))
+            {
+                number = number - 2;
+            }
+            else
+            {
+                number = number - 1;
+            }
             num = num + 1;
-            number = number - 1;
+            
         }
         
         return num;
@@ -996,8 +1004,17 @@ public partial class Template_Default : System.Web.UI.Page
         int num = Int32.Parse(textNum);
         if (num > -3)
         {
+            if (num.Equals(-1) || num.Equals(-2) || num.Equals(2) || num.Equals(3))
+            {
+                number = number + 2;
+            }
+            
+            else
+            {
+                number = number + 1;
+            }
             num = num - 1;
-            number = number + 1;
+           
         }
         
         return num;
