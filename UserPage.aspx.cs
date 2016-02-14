@@ -190,6 +190,11 @@ public partial class UserPage : System.Web.UI.Page
                 }
             }
             adminConn.Close();
+            ButtonDelete.Visible = true;
+        }
+        else
+        {
+            ButtonDelete.Visible = false;
         }
     }
 
@@ -342,6 +347,18 @@ public partial class UserPage : System.Web.UI.Page
 
             EmergencyDice.Text = "Emergency Dice: ";
             Experience.Text = "XPs: ";
+            Response.Redirect("UserPage.aspx");
+        }
+        
+    }
+
+    protected void ButtonDetail_Click(object sender, EventArgs e)
+    {
+        if(DDLCharacterList.SelectedIndex != 0)
+        {
+            Session["character"] = DDLCharacterList.SelectedValue.ToString();
+            Response.Redirect("CharacterSheet.Aspx");
+            ButtonDelete.Text = Session["character"].ToString();
         }
         
     }

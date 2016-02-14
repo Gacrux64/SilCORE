@@ -13,7 +13,7 @@
         <asp:label ID="AccountCharacters" runat="server" text="Your Characters:"></asp:label>
         <br />
         <br />
-        <asp:dropdownlist ID="DDLCharacterList" runat="server" Enabled="False" DataSourceID="SQLUserCharacters" DataTextField="CHARACTER_NAME" DataValueField="CHARACTER_ID" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="DDLCharacterList_SelectedIndexChanged">
+        <asp:dropdownlist ID="DDLCharacterList" runat="server" DataSourceID="SQLUserCharacters" DataTextField="CHARACTER_NAME" DataValueField="CHARACTER_ID" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="DDLCharacterList_SelectedIndexChanged">
             <asp:ListItem>Select a character</asp:ListItem>
         </asp:dropdownlist>
         <asp:sqldatasource id="SQLUserCharacters" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [CHARACTER_ID], [CHARACTER_NAME], [CHARACTER_AGI], [CHARACTER_APP], [CHARACTER_BLD], [CHARACTER_CRE], [CHARACTER_FIT], [CHARACTER_INF], [CHARACTER_KNO], [CHARACTER_PER], [CHARACTER_PSY], [CHARACTER_WIL], [CHARACTER_EMERGENCY_DICE], [CHARACTER_XP] FROM [CHARACTER] WHERE ([CHARACTER_USER_ID] = @CHARACTER_USER_ID)">
@@ -117,7 +117,7 @@
         <br />
         <asp:label ID="Experience" runat="server" text="XPs: "></asp:label>
         <br />
-        <asp:LinkButton ID="ButtonDetail" runat="server" text="Detailed View" />
+        <asp:LinkButton ID="ButtonDetail" runat="server" text="Detailed View" OnClick="ButtonDetail_Click" />
         <br />
         <br />
         <asp:button ID="ButtonDelete" runat="server" text="Delete" OnClick="ButtonDelete_Click" Visible="false" />

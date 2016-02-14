@@ -5,17 +5,21 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using SPF;
+using System.Collections;
+using System.IO;
+using System.Xml.Serialization;
 
 public partial class CharacterSheet : System.Web.UI.Page
 {
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(Session["user"].ToString() == null)
+        if(Session["user"] == null)
         {
             Response.Redirect("Default.aspx");
         }
-        else if(Session["character"].ToString() == null)
+        else if(Session["character"] == null)
         {
             Response.Redirect("UserPage");
         }
@@ -29,7 +33,7 @@ public partial class CharacterSheet : System.Web.UI.Page
             charConn.Open();
             using (SqlDataReader sqlReader = charComm.ExecuteReader())
             {
-                while(sqlReader.HasRows)
+                while (sqlReader.Read())
                 {
                     LabelName.Text = "Name: " + sqlReader["CHARACTER_NAME"].ToString();
 
@@ -45,11 +49,32 @@ public partial class CharacterSheet : System.Web.UI.Page
                     LabelPSY.Text = "PSY: " + sqlReader["CHARACTER_PSY"].ToString();
                     LabelWIL.Text = "WIL: " + sqlReader["CHARACTER_WIL"].ToString();
 
+
+                    XmlSerializer serialize = new XmlSerializer(typeof(List<Skill>));
+
                     //Code to handle skills
+                    List<Skill> skills = new List<Skill>();
+                    skills = (List<Skill>)serialize.Deserialize(new StringReader(sqlReader["CHARACTER_SKILLS"].ToString()));
+                    foreach (Skill skill in skills)
+                    {
+                        LabelSkills.Text += skill.getSkillInfo() + "<br />";
+                    }
 
                     //Code to handle perks
+                    List<Perk> perks = new List<Perk>();
+                    perks = (List<Perk>)serialize.Deserialize(new StringReader(sqlReader["CHARACTER_PERKS"].ToString()));
+                    foreach (Perk perk in perks)
+                    {
+                        LabelPerks.Text += perk.getPerkInfo() + "<br />";
+                    }
 
                     //Code to handle flaws
+                    List<Flaw> flaws = new List<Flaw>();
+                    flaws = (List<Flaw>)serialize.Deserialize(new StringReader(sqlReader["CHARACTER_FLAWS"].ToString()));
+                    foreach (Flaw flaw in flaws)
+                    {
+                        LabelFlaws.Text += flaw.getFlawInfo() + "<br />";
+                    }
 
                     LabelED.Text = "Emergency Dice: " + sqlReader["CHARACTER_EMERGENCY_DICE"].ToString();
                     LabelXP.Text = "XPs: " + sqlReader["CHARACTER_XP"].ToString();

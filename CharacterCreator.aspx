@@ -51,7 +51,10 @@ Character Creator
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
                             <br />
-                         Primary Statistic:<asp:Label ID="Label1" runat="server"></asp:Label>
+                            Character Points:<asp:Label ID="Label1" runat="server"></asp:Label>
+                    <br />
+                    <br />
+
                     <br />
                     <br />
                     <span onmouseover="agility()">AGI</span><br />
@@ -696,7 +699,7 @@ Character Creator
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <br />
-                    <asp:Button ID="Button47" runat="server" Text="Submit" />
+                    <asp:Button ID="Button47" runat="server" Text="Submit" OnClick="Button47_Click" />
                     <br />
 
                 

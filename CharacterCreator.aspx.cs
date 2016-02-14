@@ -4,6 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using SPF;
+using System.Collections;
+using System.IO;
+using System.Xml.Serialization;
 
 public partial class Template_Default : System.Web.UI.Page
 {
@@ -13,8 +18,18 @@ public partial class Template_Default : System.Web.UI.Page
     public static int lvlhth;
     public static bool melee = false;
     public static int lvlmelee;
+
+    private List<Skill> skills = new List<Skill>();
+    private List<Perk> perks = new List<Perk>();
+    private List<Flaw> flaws = new List<Flaw>();
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(Session["user"] == null)
+        {
+            Response.Redirect("UserPage.aspx");
+        }
+
         Label1.Text = number.ToString();
         if (!IsPostBack)
         {
@@ -1303,5 +1318,173 @@ if (number>0)
         {
             DropDownList34.Visible = true;
         }
+    }
+
+    protected void Button47_Click(object sender, EventArgs e)
+    {
+        SqlConnection insertConn = GetDBConnection();
+        SqlCommand insertComm = new SqlCommand("INSERT INTO CHARACTER(" + 
+                                 "CHARACTER_USER_ID, " + 
+                                 "CHARACTER_NAME, " + 
+                                 "CHARACTER_AGI, " + 
+                                 "CHARACTER_APP, " + 
+                                 "CHARACTER_BLD, " +
+                                 "CHARACTER_CRE, " +
+                                 "CHARACTER_FIT, " + 
+                                 "CHARACTER_INF, " + 
+                                 "CHARACTER_KNO, " + 
+                                 "CHARACTER_PER, " +
+                                 "CHARACTER_PSY, " +
+                                 "CHARACTER_WIL, " +
+                                 "CHARACTER_SEC_STR, " +
+                                 "CHARACTER_SEC_HEA, " +
+                                 "CHARACTER_SEC_STA, " +
+                                 "CHARACTER_SEC_UD, " +
+                                 "CHARACTER_SEC_AD, " +
+                                 "CHARACTER_SEC_FLESH_WOUND, " + 
+                                 "CHARACTER_SEC_DEEP_WOUND, " +
+                                 "CHARACTER_SEC_INSTANT_DEATH, " +
+                                 "CHARACTER_SEC_SYSTEM_SHOCK, " +
+                                 "CHARACTER_SKILLS, " +
+                                 "CHARACTER_PERKS, " +
+                                 "CHARACTER_FLAWS, " +
+                                 "CHARACTER_XP, " +
+                                 "CHARACTER_EMERGENCY_DICE, " + 
+                                 "CHARACTER_GAME_TYPE, " +
+                                 "CHARACTER_DATE_CREATED)  " + 
+                                 "VALUES(" +
+                                 "@UID, " +
+                                 "@NAME, " +
+                                 "@AGI, " +
+                                 "@APP, " +
+                                 "@BLD, " +
+                                 "@CRE, " +
+                                 "@FIT, " +
+                                 "@INF, " +
+                                 "@KNO, " +
+                                 "@PER, " + 
+                                 "@PSY, " +
+                                 "@WIL, " +
+                                 "@STR, " +
+                                 "@HEA, " +
+                                 "@STA, " +
+                                 "@UD, " +
+                                 "@AD, " +
+                                 "@FW, " +
+                                 "@DW, " +
+                                 "@ID, " +
+                                 "@SS, " +
+                                 "@SKILLS, " +
+                                 "@PERKS, " +
+                                 "@FLAWS, " +
+                                 "@XP, " +
+                                 "@ED, " + 
+                                 "@TYPE, " +
+                                 "GETDATE())", insertConn);
+
+        SqlParameter UIDPar = new SqlParameter("UID", Session["user"].ToString());
+        SqlParameter NamePar = new SqlParameter("NAME", TextBox1.Text);
+        insertComm.Parameters.Add(UIDPar);
+        insertComm.Parameters.Add(NamePar);
+
+        SqlParameter AGIPAR = new SqlParameter("AGI", TextBox2.Text);
+        SqlParameter APPPAR = new SqlParameter("APP", TextBox3.Text);
+        SqlParameter BLDPAR = new SqlParameter("BLD", TextBox4.Text);
+        SqlParameter CREPAR = new SqlParameter("CRE", TextBox5.Text);
+        SqlParameter FITPAR = new SqlParameter("FIT", TextBox6.Text);
+        SqlParameter INFPAR = new SqlParameter("INF", TextBox7.Text);
+        SqlParameter KNOPAR = new SqlParameter("KNO", TextBox8.Text);
+        SqlParameter PERPAR = new SqlParameter("PER", TextBox9.Text);
+        SqlParameter PSYPAR = new SqlParameter("PSY", TextBox10.Text);
+        SqlParameter WILPAR = new SqlParameter("WIL", TextBox11.Text);
+        insertComm.Parameters.Add(AGIPAR);
+        insertComm.Parameters.Add(APPPAR);
+        insertComm.Parameters.Add(BLDPAR);
+        insertComm.Parameters.Add(CREPAR);
+        insertComm.Parameters.Add(FITPAR);
+        insertComm.Parameters.Add(INFPAR);
+        insertComm.Parameters.Add(KNOPAR);
+        insertComm.Parameters.Add(PERPAR);
+        insertComm.Parameters.Add(PSYPAR);
+        insertComm.Parameters.Add(WILPAR);
+
+        SqlParameter STRPAR = new SqlParameter("STR", TextBox12.Text);
+        SqlParameter HEAPAR = new SqlParameter("HEA", TextBox13.Text);
+        SqlParameter STAPAR = new SqlParameter("STA", TextBox14.Text);
+        SqlParameter UDPAR = new SqlParameter("UD", TextBox15.Text);
+        SqlParameter ADPAR = new SqlParameter("AD", TextBox16.Text);
+        SqlParameter FWPAR = new SqlParameter("FW", TextBox17.Text);
+        SqlParameter DWPAR = new SqlParameter("DW", TextBox18.Text);
+        SqlParameter IDPAR = new SqlParameter("ID", TextBox19.Text);
+        SqlParameter SSPAR = new SqlParameter("SS", TextBox20.Text);
+        insertComm.Parameters.Add(STRPAR);
+        insertComm.Parameters.Add(HEAPAR);
+        insertComm.Parameters.Add(STAPAR);
+        insertComm.Parameters.Add(UDPAR);
+        insertComm.Parameters.Add(ADPAR);
+        insertComm.Parameters.Add(FWPAR);
+        insertComm.Parameters.Add(DWPAR);
+        insertComm.Parameters.Add(IDPAR);
+        insertComm.Parameters.Add(SSPAR);
+
+
+        //TODO: Serilaize stuff, fix Gametype dropdown.
+        foreach(ListItem skillItem in ListBox4.Items)
+        {
+            Skill skill = new Skill(skillItem.Text, skillItem.Value);
+            skills.Add(skill);
+        }
+
+        foreach (ListItem perkItem in ListBox5.Items)
+        {
+            Perk perk = new Perk(perkItem.Text, perkItem.Value);
+            perks.Add(perk);
+        }
+
+        foreach (ListItem flawItem in ListBox6.Items)
+        {
+            Flaw flaw = new Flaw(flawItem.Text, flawItem.Value);
+            flaws.Add(flaw);
+        }
+
+        using (StringWriter textWriter = new StringWriter())
+        {
+            XmlSerializer serializerSkill = new XmlSerializer(typeof(List<Skill>));
+            XmlSerializer serializerPerk = new XmlSerializer(typeof(List<Perk>));
+            XmlSerializer serializerFlaw = new XmlSerializer(typeof(List<Flaw>));
+
+            serializerSkill.Serialize(textWriter, skills);
+            SqlParameter SKILLSPAR = new SqlParameter("SKILLS", textWriter.ToString());
+            insertComm.Parameters.Add(SKILLSPAR);
+
+            serializerPerk.Serialize(textWriter, perks);
+            SqlParameter PERKSPAR = new SqlParameter("PERKS", textWriter.ToString());
+            insertComm.Parameters.Add(PERKSPAR);
+
+            serializerFlaw.Serialize(textWriter, flaws);
+            SqlParameter FLAWSPAR = new SqlParameter("FLAWS", textWriter.ToString());
+            insertComm.Parameters.Add(FLAWSPAR);
+        }
+
+        SqlParameter XPPAR = new SqlParameter("XP", TextBox22.Text);
+        SqlParameter EDPAR = new SqlParameter("ED", TextBox21.Text);
+        SqlParameter TYPEPAR = new SqlParameter("TYPE", DropDownList18.SelectedValue.ToString());
+        insertComm.Parameters.Add(XPPAR);
+        insertComm.Parameters.Add(EDPAR);
+        insertComm.Parameters.Add(TYPEPAR);
+
+        insertConn.Open();
+        insertComm.ExecuteNonQuery();
+        insertConn.Close();
+    }
+
+    //SQL functions
+    private SqlConnection GetDBConnection()
+    {
+        string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Builder.mdf;Integrated Security=True";
+
+        SqlConnection loginConnection = new SqlConnection(conStr);
+
+        return loginConnection;
     }
 }

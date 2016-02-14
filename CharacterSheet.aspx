@@ -11,30 +11,44 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
     <asp:Label ID="LabelName" runat="server" Text=""></asp:Label>
     <br />
+    <br />
     <div style="float:left;width:50%;"">
         <asp:Label ID="LabelAGI" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelAPP" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelBLD" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelCRE" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelFIT" runat="server" Text=""></asp:Label>
     </div>
     <div style="float:left;width:50%;">
         <asp:Label ID="LabelINF" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelKNO" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelPER" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelPSY" runat="server" Text=""></asp:Label>
+        <br />
         <asp:Label ID="LabelWIL" runat="server" Text=""></asp:Label>
     </div>
-    <hr style="clear:both;" />
+    <br style="clear:both;" />
+    <hr />
+    <br />
     <asp:Label ID="LabelSkills" runat="server" Text=""></asp:Label>
     <hr />
+    <br />
     <div style="float:left;width:50%;"">
         <asp:Label ID="LabelPerks" runat="server" Text=""></asp:Label>
     </div>
     <div style="float:left;width:50%;">
         <asp:Label ID="LabelFlaws" runat="server" Text=""></asp:Label>
     </div>
-    <hr style="clear:both;" />
+    <br style="clear:both;" />
+    <hr />
+    <br />
     <asp:Label ID="LabelED" runat="server" Text=""></asp:Label>
     <br />
     <asp:Label ID="LabelXP" runat="server" Text=""></asp:Label>
