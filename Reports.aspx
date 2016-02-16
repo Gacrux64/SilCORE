@@ -8,10 +8,10 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitle" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
-    <h2 style="text-align:left;">User Login Report</h2>
+    <h2 style="text-align:left;">User Registration</h2>
     <hr />
     <div runat="server" id="report1">
-        <p id="userlog">Number of users login:<span id="userLoginNumber"></span></p>
+        <p id="userlog">Number of users registered:<span id="userLoginNumber"></span></p>
         <div runat="server" id="fromDate" style="width:35%; float:left;">From: <span id="startdate"></span> 
             <asp:Label ID="Label1" runat="server"></asp:Label>
             <asp:Calendar ID="Calendar1" runat="server" ForeColor="White" Height="37px" Width="122px" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
@@ -55,7 +55,7 @@
     <h2 style="text-align:left;">Exception Report</h2>
     <hr />
     <div runat="server" id="report2">
-        <p>Users without any character created:</p>
+        <p>Registered users with no created characters:</p>
             <div runat="server" id="userExceptions" style="margin-left:25px;">
                 Iamlegend<br />
                 UserPlaceHolder<br />
@@ -66,17 +66,20 @@
     <h2 style="text-align:left;">Character Creation Report</h2>
     <hr />
     <div runat="server" id="report3">
-        <p>This is all the characters that have been registered to Silcore's Character Creation</p>
+        <p>Characters created with the SilCORE Character Builder by user account.</p>
         <div runat="server" id="characterReport" style="margin-left:25px;">
             Username:
-            <asp:DropDownList ID="DropDownList1" runat="server">
-                <asp:ListItem> Select Username</asp:ListItem>
-                <asp:ListItem>BigManAwesome</asp:ListItem>
+            <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SQLDataSourceUsers" DataTextField="USER_LOGIN" DataValueField="USER_ID">
             </asp:DropDownList>
+            <asp:sqldatasource ID="SQLDataSourceCharByUser" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [CHARACTER_ID] FROM [CHARACTER] WHERE ([CHARACTER_USER_ID] = @CHARACTER_USER_ID)">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="DropDownList1" Name="CHARACTER_USER_ID" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:sqldatasource>
+            <asp:SqlDataSource ID="SQLDataSourceUsers" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSilCORE %>" SelectCommand="SELECT [USER_ID], [USER_LOGIN] FROM [USER_INFO]"></asp:SqlDataSource>
             <br /><br />
             <div class="characters" style="margin-left:50px;">
-              Character Name: <a href="">Bob</a><br />
-              Character Name: <a href="">BobNo2(Dummy)</a>
+              
                
             </div>
             <br />

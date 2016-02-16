@@ -1457,9 +1457,13 @@ if (number>0)
             SqlParameter SKILLSPAR = new SqlParameter("SKILLS", textWriter.ToString());
             insertComm.Parameters.Add(SKILLSPAR);
 
+            textWriter.Flush();
+
             serializerPerk.Serialize(textWriter, perks);
             SqlParameter PERKSPAR = new SqlParameter("PERKS", textWriter.ToString());
             insertComm.Parameters.Add(PERKSPAR);
+
+            textWriter.Flush();
 
             serializerFlaw.Serialize(textWriter, flaws);
             SqlParameter FLAWSPAR = new SqlParameter("FLAWS", textWriter.ToString());
