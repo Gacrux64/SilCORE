@@ -10,7 +10,8 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderMainBox" Runat="Server">
     <asp:Label ID="LabelMes" runat="server" Text=""></asp:Label>
-    <br/>
+    <br />
+    <br />
     <asp:Label ID="LabelRedirect" runat="server" Text="Redirecting..."></asp:Label>
 </asp:Content>
 

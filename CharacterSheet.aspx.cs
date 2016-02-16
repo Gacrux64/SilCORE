@@ -49,6 +49,16 @@ public partial class CharacterSheet : System.Web.UI.Page
                     LabelPSY.Text = "PSY: " + sqlReader["CHARACTER_PSY"].ToString();
                     LabelWIL.Text = "WIL: " + sqlReader["CHARACTER_WIL"].ToString();
 
+                    LabelSTR.Text = "STR: " + sqlReader["CHARACTER_SEC_STR"].ToString();
+                    LabelHEA.Text = "HEA: " + sqlReader["CHARACTER_SEC_HEA"].ToString();
+                    LabelSTA.Text = "STA: " + sqlReader["CHARACTER_SEC_STA"].ToString();
+                    LabelUD.Text = "UD: " + sqlReader["CHARACTER_SEC_UD"].ToString();
+                    LabelAD.Text = "AD: " + sqlReader["CHARACTER_SEC_AD"].ToString();
+
+                    LabelFW.Text = "FW: " + sqlReader["CHARACTER_SEC_FLESH_WOUND"].ToString();
+                    LabelDW.Text = "DW: " + sqlReader["CHARACTER_SEC_DEEP_WOUND"].ToString();
+                    LabelID.Text = "ID: " + sqlReader["CHARACTER_SEC_INSTANT_DEATH"].ToString();
+                    LabelSS.Text = "SS: " + sqlReader["CHARACTER_SEC_SYSTEM_SHOCK"].ToString();
 
                     XmlSerializer serialize = new XmlSerializer(typeof(List<Skill>));
 

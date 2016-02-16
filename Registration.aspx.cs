@@ -33,7 +33,7 @@ public partial class Registration : System.Web.UI.Page
             {
                 if (user.CreateNewUser(TextBoxFirstName.Text, TextBoxLastName.Text, TextBoxLogin.Text.ToLower(), TextBoxEmail.Text, TextBoxPass2.Text.ToLower()))
                 {
-                    LabelMsg.Text = "Account created successfully!";
+                    Response.Redirect("Redirect.aspx?Query=Registration");
                 }
                 else
                 {

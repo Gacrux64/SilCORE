@@ -13,6 +13,9 @@
     <br />
     <br />
     <div style="float:left;width:50%;"">
+        <span>Primary Stats:</span>
+        <br />
+        <br />
         <asp:Label ID="LabelAGI" runat="server" Text=""></asp:Label>
         <br />
         <asp:Label ID="LabelAPP" runat="server" Text=""></asp:Label>
@@ -22,8 +25,24 @@
         <asp:Label ID="LabelCRE" runat="server" Text=""></asp:Label>
         <br />
         <asp:Label ID="LabelFIT" runat="server" Text=""></asp:Label>
+        <br />
+        <br />
+        <span>Secondary Stats:</span>
+        <br />
+        <br />
+        <asp:Label ID="LabelSTR" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelHEA" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelSTA" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelUD" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelAD" runat="server" Text=""></asp:Label>
     </div>
     <div style="float:left;width:50%;">
+        <br />
+        <br />
         <asp:Label ID="LabelINF" runat="server" Text=""></asp:Label>
         <br />
         <asp:Label ID="LabelKNO" runat="server" Text=""></asp:Label>
@@ -33,6 +52,17 @@
         <asp:Label ID="LabelPSY" runat="server" Text=""></asp:Label>
         <br />
         <asp:Label ID="LabelWIL" runat="server" Text=""></asp:Label>
+        <br />
+        <br />
+        <br />
+        <br />
+        <asp:Label ID="LabelFW" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelDW" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelID" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="LabelSS" runat="server" Text=""></asp:Label>
     </div>
     <br style="clear:both;" />
     <hr />

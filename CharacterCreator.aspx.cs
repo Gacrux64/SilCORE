@@ -1447,29 +1447,26 @@ if (number>0)
             flaws.Add(flaw);
         }
 
-        using (StringWriter textWriter = new StringWriter())
-        {
-            XmlSerializer serializerSkill = new XmlSerializer(typeof(List<Skill>));
+        StringWriter textWriterSkills = new StringWriter();
+        StringWriter textWriterPerks = new StringWriter();
+        StringWriter textWriterFlaws = new StringWriter();
+
+        XmlSerializer serializerSkill = new XmlSerializer(typeof(List<Skill>));
             XmlSerializer serializerPerk = new XmlSerializer(typeof(List<Perk>));
             XmlSerializer serializerFlaw = new XmlSerializer(typeof(List<Flaw>));
 
-            serializerSkill.Serialize(textWriter, skills);
-            SqlParameter SKILLSPAR = new SqlParameter("SKILLS", textWriter.ToString());
+            serializerSkill.Serialize(textWriterSkills, skills);
+            SqlParameter SKILLSPAR = new SqlParameter("SKILLS", textWriterSkills.ToString());
             insertComm.Parameters.Add(SKILLSPAR);
 
-            textWriter.Flush();
-
-            serializerPerk.Serialize(textWriter, perks);
-            SqlParameter PERKSPAR = new SqlParameter("PERKS", textWriter.ToString());
+            serializerPerk.Serialize(textWriterPerks, perks);
+            SqlParameter PERKSPAR = new SqlParameter("PERKS", textWriterPerks.ToString());
             insertComm.Parameters.Add(PERKSPAR);
 
-            textWriter.Flush();
-
-            serializerFlaw.Serialize(textWriter, flaws);
-            SqlParameter FLAWSPAR = new SqlParameter("FLAWS", textWriter.ToString());
+            serializerFlaw.Serialize(textWriterFlaws, flaws);
+            SqlParameter FLAWSPAR = new SqlParameter("FLAWS", textWriterFlaws.ToString());
             insertComm.Parameters.Add(FLAWSPAR);
-        }
-
+       
         SqlParameter XPPAR = new SqlParameter("XP", TextBox22.Text);
         SqlParameter EDPAR = new SqlParameter("ED", TextBox21.Text);
         SqlParameter TYPEPAR = new SqlParameter("TYPE", DropDownList18.SelectedValue.ToString());
@@ -1480,6 +1477,8 @@ if (number>0)
         insertConn.Open();
         insertComm.ExecuteNonQuery();
         insertConn.Close();
+
+        Response.Redirect("Redirect.aspx?Query=CharSubmit");
     }
 
     //SQL functions

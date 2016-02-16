@@ -28,10 +28,10 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ErrorMessage="*Please enter an E-mail address." ControlToValidate="TextBoxEmail" Display="Dynamic" ForeColor="Gray"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="*Not a valid E-mail." ControlToValidate="TextBoxEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Gray"></asp:RegularExpressionValidator>
         <br />
-        Password<br /><asp:TextBox ID="TextBoxPass1" runat="server"></asp:TextBox>
+        Password<br /><asp:TextBox ID="TextBoxPass1" runat="server" TextMode="Password"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass1" runat="server" ErrorMessage="*Please enter a password." ControlToValidate="TextBoxPass1" Display="Dynamic" ForeColor="Gray"></asp:RequiredFieldValidator>
         <br />
-        Confirm Password<br /><asp:TextBox ID="TextBoxPass2" runat="server"></asp:TextBox>
+        Confirm Password<br /><asp:TextBox ID="TextBoxPass2" runat="server" TextMode="Password"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidatorPass2" runat="server" ErrorMessage="*Please enter your password again." ControlToValidate="TextBoxPass2" Display="Dynamic" ForeColor="Gray"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="CompareValidatorPasswords" runat="server" ErrorMessage="*The passwords you entered do not match." ControlToCompare="TextBoxPass1" ControlToValidate="TextBoxPass2" Display="Dynamic" ForeColor="Gray"></asp:CompareValidator>
         <br />

@@ -38,7 +38,7 @@ namespace NewUser
 
         public SqlCommand NewInsertCommand(SqlConnection sqlConn)
         {
-            SqlCommand insertComm = new SqlCommand("INSERT INTO USER_INFO(USER_FIRST, USER_LAST, USER_EMAIL, USER_LOGIN, USER_PASSWORD, USER_SALT, USER_ADMIN) " +
+            SqlCommand insertComm = new SqlCommand("INSERT INTO USER_INFO(USER_FIRST, USER_LAST, USER_EMAIL, USER_LOGIN, USER_PASSWORD, USER_SALT, USER_DATE) " +
                                 "VALUES (" +
                                 "@firstName," +
                                 "@lastName," +
@@ -46,7 +46,7 @@ namespace NewUser
                                 "@login," +
                                 "@password," +
                                 "CONVERT(varbinary(MAX), @salt)," +
-                                "@userType)", sqlConn);
+                                "CONVERT(date, getdate()))", sqlConn);
 
             return insertComm;
         }
@@ -93,7 +93,6 @@ namespace NewUser
                 insertComm.Parameters.Add("@login", SqlDbType.NVarChar, -1).Value = login;
                 insertComm.Parameters.Add("@password", SqlDbType.NVarChar, -1).Value = Convert.ToBase64String(password);
                 insertComm.Parameters.Add("@salt", SqlDbType.NVarChar, -1).Value = Convert.ToBase64String(salt);
-                insertComm.Parameters.Add("@userType", SqlDbType.Int, -1).Value = 0;
 
                 //Execute the insert command using the insert statement, can throw an error.
                 connectionBuilder.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Builder.mdf;Integrated Security=True";

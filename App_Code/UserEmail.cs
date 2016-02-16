@@ -12,7 +12,17 @@ namespace NewUser
         //E-mail-related functions
         public string NewPasswordEmail(string name, string login, string password)
         {
-            string body = "Thank you for signing up with the SilCORE character Builder";
+            string body = "Thank you for signing up with the SilCORE character Builder. " +
+                          "We hope that you will enjoy using it to quickly generate PCs, or NPCs, for your campaign." + 
+                          "\n\nPlease be aware that the system is a work in progress, and as such, is a bit feature bare. " +
+                          "Updating and maintaining the SilCORE character builder is a hobby of mine and I strive to release meaningful " +
+                          "updates once a month." +
+                          "\n\nThe system is currently in an alpha state and can be used for quick and easy character generation. " + 
+                          "More features will be added soon!" +
+                          "\n\nIf you have any questions, concerns, or want to report a bug, you can contact the developers at SilCORECB@Gmail.com. " +
+                          "We hope you find the tool useful." +
+                          "\n\n-Matt, SilCORECB lead developer";
+
             return body;
         }
 
