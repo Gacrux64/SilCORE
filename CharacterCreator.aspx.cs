@@ -11,13 +11,16 @@ using System.IO;
 using System.Xml.Serialization;
 
 public partial class Template_Default : System.Web.UI.Page
-{
-    public static double number=10;
+{ 
+    public static double number=20;
+    public static double skillnumber = 40;
     public static int dependentValue;
     public static bool hth = false;
     public static int lvlhth;
     public static bool melee = false;
     public static int lvlmelee;
+    public static double edices=0;
+    public static double sdices=0;
 
     private List<Skill> skills = new List<Skill>();
     private List<Perk> perks = new List<Perk>();
@@ -25,18 +28,24 @@ public partial class Template_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(Session["user"] == null)
+        if (Session["user"] == null)
         {
-            Response.Redirect("UserPage.aspx");
+            Response.Redirect("Default.aspx");
         }
 
         Label1.Text = number.ToString();
+        Label2.Text = skillnumber.ToString();
         if (!IsPostBack)
         {
-            number = 10;
+            number = 20;
             secondaryStats();
         }
-        TextBox21.Text = number.ToString(); 
+        Label3.Text = "";
+        Label4.Text = "";
+        Label5.Text = "";
+        Label6.Text = "";
+        Label7.Text = "";
+        
     }
     protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -45,49 +54,58 @@ public partial class Template_Default : System.Web.UI.Page
     protected void Button36_Click(object sender, EventArgs e)
     {
         string skill = ListBox1.SelectedItem.Value;
-        string level = DropDownList1.SelectedValue;
+        int getlevel =Int32.Parse(DropDownList1.SelectedValue);
+        int level = getlevel * getlevel;
         var listitem = new ListItem();
         if(skill=="Hand-to-hand"){
             hth = true;
-            lvlhth = Int32.Parse(level);
+            lvlhth = level;
+            secondaryStats();
         }
         if(skill=="Melee"){
             melee = true;
-            lvlmelee = Int32.Parse(level);
+            lvlmelee = level;
+            secondaryStats();
         }
-        string complex = DropDownList2.SelectedValue;
+        int getcomplexity = Int32.Parse(DropDownList2.SelectedValue);
+        int complex = getcomplexity  * getcomplexity;
         
 
-        string toListbox2 = skill + ": Level-" + level + ", Complexity-" + complex;
-        int value = Int32.Parse(level) + Int32.Parse(complex);
-        if (number >= value)
+        string toListbox2 = skill + ": Level-" + getlevel + ", Complexity-" + getcomplexity;
+        int value = level + complex;
+        if (skillnumber >= value)
         {
             ListBox1.Items.Remove(ListBox1.SelectedItem);
-            number = number - value;
-            Label1.Text = number.ToString();
-          
-            TextBox21.Text = number.ToString();
+            skillnumber = skillnumber - value;
+            Label2.Text = skillnumber.ToString();
+            
             listitem.Text = toListbox2;
             listitem.Value = value.ToString();
             ListBox4.Items.Add(listitem);
         }
-        
+        else
+        {
+            Label5.Text = "*You are missing Skill Points";
+        }
+
     }
     protected void Button35_Click(object sender, EventArgs e)
     {
         string item = ListBox4.SelectedItem.Text; 
         int l = item.IndexOf(":");
         string itemBack = item.Substring(0, l);
-        number = number + Int32.Parse(ListBox4.SelectedItem.Value);
+        skillnumber = skillnumber + Int32.Parse(ListBox4.SelectedItem.Value);
         if(itemBack=="Hand-to-hand"){
             hth = false;
+            secondaryStats();
         }
         if (itemBack == "Melee")
         {
             melee = false;
+            secondaryStats();
         }
 
-        Label1.Text = number.ToString();
+        Label2.Text = skillnumber.ToString();
         ListBox1.Items.Add(itemBack);
         ListBox4.Items.Remove(ListBox4.SelectedItem);
         
@@ -198,20 +216,32 @@ public partial class Template_Default : System.Web.UI.Page
         else if (ListBox2.SelectedItem.Text.Equals("Wealthy"))
         {
             wealthy = DropDownList17.SelectedItem.Text;
-            if (wealthy != "" && number > Int32.Parse(DropDownList14.SelectedItem.Value))
+            if (wealthy != "Choose")
             {
-                if (wealthy.Equals("Renewable"))
+                if (number > Int32.Parse(DropDownList14.SelectedItem.Value))
                 {
-                    cwealthy = DropDownList14.SelectedItem.Text;
-                    value = Int32.Parse(DropDownList14.SelectedItem.Value);
+                    if (wealthy.Equals("Renewable"))
+                    {
+                        cwealthy = DropDownList14.SelectedItem.Text;
+                        value = Int32.Parse(DropDownList14.SelectedItem.Value);
+
+                    }
+                    else if (wealthy.Equals("Non-Renewable"))
+                    {
+                        cwealthy = DropDownList15.SelectedItem.Text;
+                        value = Int32.Parse(DropDownList15.SelectedItem.Value);
+
+                    }
+                    perkadd = perks + "-" + wealthy + ":" + cwealthy;
                 }
-                else if (wealthy.Equals("Non-Renewable"))
-                {
-                    cwealthy = DropDownList15.SelectedItem.Text;
-                    value = Int32.Parse(DropDownList15.SelectedItem.Value);
-                }
-                perkadd = perks + "-" + wealthy + ":" + cwealthy;
             }
+            else
+            {
+                Label4.Text = "*Please choose between Renewable or Non-Renewable";
+            }
+            
+            
+            
         }
         else if (ListBox2.SelectedItem.Text.Equals("Accelerated Healing"))
         {
@@ -283,7 +313,7 @@ public partial class Template_Default : System.Web.UI.Page
             perkadd = perks;
             value = 5;
         }
-        else if (ListBox2.SelectedItem.Text.Equals("Perfect Pitch"))
+        else if (ListBox2.SelectedItem.Text.Equals("Perfect-Pitch"))
         {
             perkadd = perks;
             value = 5;
@@ -323,11 +353,14 @@ public partial class Template_Default : System.Web.UI.Page
         {
             number = number - value;
             Label1.Text = number.ToString();
-          
-            TextBox21.Text = number.ToString();
             listitem.Text = perkadd;
             listitem.Value = value.ToString();
             ListBox5.Items.Add(listitem);
+            Label5.Text = "";
+        }
+        else
+        {
+            Label6.Text = "*You are missing Character Points";
         }
     }
     protected void Button38_Click(object sender, EventArgs e)
@@ -336,8 +369,6 @@ public partial class Template_Default : System.Web.UI.Page
         int value = Int32.Parse(ListBox5.SelectedItem.Value);
         number = number + value;
         Label1.Text = number.ToString();
-    
-        TextBox21.Text = number.ToString();
         ListBox5.Items.Remove(ListBox5.SelectedItem);
     }
     protected void Button39_Click(object sender, EventArgs e)
@@ -372,19 +403,25 @@ public partial class Template_Default : System.Web.UI.Page
             addiction = TextBox24.Text;
             
 
-            if (!addiction.Equals("") || !addiction.Equals("Drugs"))
+            if (addiction.Equals("") || addiction.Equals("Drugs"))
             {
-                if (!TextBox25.Text.Equals("Rating"))
-                {
-                    
-                    rating = Int32.Parse(TextBox25.Text);
-                    value = Math.Round(-rating/3);
-                    flawadd = flaws + "-" + addiction+":"+rating;
-                }
+                Label3.Text = "*Please enter a type of drug";
+                
             }
             else
             {
+                if (TextBox25.Text.Equals("Rating") || TextBox25.Text.Equals(""))
+                {
 
+                    Label3.Text = "*Please enter a rating for the drug";
+                }
+                else
+                {
+                    rating = Int32.Parse(TextBox25.Text);
+                    value = Math.Round(-rating / 3);
+                    flawadd = flaws + "-" + addiction + ":" + rating;
+
+                }
             }
         }
         else if (ListBox3.SelectedItem.Text.Equals("Age"))
@@ -419,7 +456,7 @@ public partial class Template_Default : System.Web.UI.Page
             flawadd = flaws;
             value = -4;
         }
-        else if (ListBox3.SelectedItem.Text.Equals("Code Honor"))
+        else if (ListBox3.SelectedItem.Text.Equals("Code of Honor"))
         {
             honor = DropDownList21.SelectedItem.Text;
             flawadd = flaws + "-" + honor;
@@ -626,8 +663,6 @@ public partial class Template_Default : System.Web.UI.Page
         {
             number = number - value;
             Label1.Text = number.ToString();
-
-            TextBox21.Text = number.ToString();
             listitem.Text = flawadd;
             listitem.Value = value.ToString();
             ListBox6.Items.Add(listitem);
@@ -642,8 +677,12 @@ public partial class Template_Default : System.Web.UI.Page
         if (number >= checkvalue) {
             number = number + removevalue;
             Label1.Text = number.ToString();
-            TextBox21.Text = number.ToString();
+           
             ListBox6.Items.Remove(ListBox6.SelectedItem);
+        }
+        else
+        {
+            Label7.Text = "*You are missing Character Points";
         }
     }
     protected void ListBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -825,7 +864,7 @@ public partial class Template_Default : System.Web.UI.Page
         int num = add(TextBox2.Text);
         Label1.Text = number.ToString();
      
-        TextBox21.Text = number.ToString();
+       
         TextBox2.Text = num.ToString();
         secondaryStats();
     }
@@ -833,7 +872,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox2.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox2.Text = num.ToString();
         secondaryStats();
     }
@@ -841,7 +880,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = add(TextBox3.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox3.Text = num.ToString();
         secondaryStats();
     }
@@ -849,33 +888,61 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox3.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox3.Text = num.ToString();
         secondaryStats();
     }
     protected void Button6_Click(object sender, EventArgs e)
     {
         int num = Int32.Parse(TextBox4.Text);
+        int newnum = num + 1;
+        double calculation = 0;
         if (num < 5 && number > 0)
         {
-            num = num + 1;
-            number = number - 1;
+            if (num >= -1)
+            {
+                calculation = (newnum + 1) * (newnum + 1);
+
+            }
+            else
+            {
+                calculation = (num + 1) * (num + 1);
+
+            }
+            if (number >= calculation)
+            {
+                number = number - calculation;
+                num = num + 1;
+            }
+
         }
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox4.Text = num.ToString();
         secondaryStats();
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
         int num = Int32.Parse(TextBox4.Text);
+        int newnum = num - 1;
+        double calculation = 0;
         if (num > -5)
         {
+            if (num < 0)
+            {
+                calculation = (newnum + 1) * (newnum + 1);
+
+            }
+            else
+            {
+                calculation = (num + 1) * (num + 1);
+            }
+            number = number + calculation;
             num = num - 1;
-            number = number + 1;
+
         }
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox4.Text = num.ToString();
         secondaryStats();
     }
@@ -884,7 +951,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = add(TextBox5.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox5.Text = num.ToString();
         secondaryStats();
     }
@@ -892,7 +959,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox5.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox5.Text = num.ToString();
         secondaryStats();
     }
@@ -900,7 +967,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = add(TextBox6.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox6.Text = num.ToString();
         secondaryStats();
     }
@@ -908,7 +975,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox6.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox6.Text = num.ToString();
         secondaryStats();
     }
@@ -916,7 +983,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = add(TextBox7.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox7.Text = num.ToString();
         secondaryStats();
     }
@@ -925,14 +992,14 @@ public partial class Template_Default : System.Web.UI.Page
         int num = remove(TextBox7.Text);
         Label1.Text = number.ToString();
         TextBox7.Text = num.ToString();
-        TextBox21.Text = number.ToString();
+        
         secondaryStats();
     }
     protected void Button14_Click(object sender, EventArgs e)
     {
         int num = add(TextBox8.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox8.Text = num.ToString();
         secondaryStats();
     }
@@ -940,7 +1007,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox8.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox8.Text = num.ToString();
         secondaryStats();
     }
@@ -949,7 +1016,7 @@ public partial class Template_Default : System.Web.UI.Page
         int num = add(TextBox9.Text);
         secondaryStats();
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox9.Text = num.ToString();
         secondaryStats();
     }
@@ -958,7 +1025,7 @@ public partial class Template_Default : System.Web.UI.Page
         int num = remove(TextBox9.Text);
         secondaryStats();
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox9.Text = num.ToString();
         secondaryStats();
     }
@@ -967,7 +1034,7 @@ public partial class Template_Default : System.Web.UI.Page
         int num = add(TextBox10.Text);
         secondaryStats();
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox10.Text = num.ToString();
         secondaryStats();
     }
@@ -975,7 +1042,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox10.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        
         TextBox10.Text = num.ToString();
         secondaryStats();
     }
@@ -983,7 +1050,7 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = add(TextBox11.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+      
         TextBox11.Text = num.ToString();
         secondaryStats();
     }
@@ -991,44 +1058,55 @@ public partial class Template_Default : System.Web.UI.Page
     {
         int num = remove(TextBox11.Text);
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+       
         TextBox11.Text = num.ToString();
         secondaryStats();
     }
     protected int add(string textNum)
     {
         int num = Int32.Parse(textNum);
-        if (num < 3 && number > 0)
+        int newnum=num+1;
+        double calculation=0;
+        if (num < 3 && number >= 0)
         {
-            if (num.Equals(1) || num.Equals(2) || num.Equals(-2) || num.Equals(-3))
+            if (num >= -1)
             {
-                number = number - 2;
+                calculation = (newnum + 1) * (newnum + 1);
+                
             }
             else
             {
-                number = number - 1;
+                calculation = (num + 1) * (num + 1);
+                
             }
-            num = num + 1;
-            
+            if (number >= calculation)
+                {
+                    number = number - calculation;
+                    num = num + 1;
+                }
+           
         }
-        
         return num;
+        
     }
     protected int remove(string textNum)
     {
         int num = Int32.Parse(textNum);
+        int newnum = num - 1;
+        double calculation=0;
         if (num > -3)
         {
-            if (num.Equals(-1) || num.Equals(-2) || num.Equals(2) || num.Equals(3))
+            if (num < 0)
             {
-                number = number + 2;
+                calculation = (newnum + 1) * (newnum + 1);
+                
             }
-            
             else
             {
-                number = number + 1;
+                calculation = (num + 1) * (num+1);
             }
-            num = num - 1;
+            number = number + calculation;
+                num = num - 1;
            
         }
         
@@ -1227,19 +1305,34 @@ public partial class Template_Default : System.Web.UI.Page
     protected void DropDownList18_SelectedIndexChanged(object sender, EventArgs e)
     {
         number = Int32.Parse(DropDownList18.SelectedItem.Value);
+       
         dependentValue = Int32.Parse(DropDownList18.SelectedItem.Value);
         reset();
         secondaryStats();
+        
+        if (DropDownList18.SelectedItem.Text.Equals("Gritty"))
+        {
+            skillnumber = 40;
+        }
+        else if (DropDownList18.SelectedItem.Text.Equals("Adventurous"))
+        {
+            skillnumber= 50;
+        }
+        else if (DropDownList18.SelectedItem.Text.Equals("Cinematic"))
+        {
+            skillnumber = 70;
+        }
         if (DropDownList18.SelectedItem.Text.Equals("Custom"))
         {
             customgame.Visible = true;
+            skillnumber = 0;
         }
         else
         {
             customgame.Visible = false;
         }
         Label1.Text = number.ToString();
-        TextBox21.Text = number.ToString();
+        Label2.Text = skillnumber.ToString();
     }
 
 
@@ -1247,13 +1340,14 @@ public partial class Template_Default : System.Web.UI.Page
 
     protected void Button42_Click(object sender, EventArgs e)
     {
-if (number>0)
+        int dice = Int32.Parse(TextBox21.Text);
+        if (dice>0)
         {
-            number = number - 1;
             int exp = Int32.Parse(TextBox22.Text);
             int newexp = exp + 1;
-            string newnum = number.ToString();
-            Label1.Text = newnum;
+            dice = dice - 1;
+            string newnum = dice.ToString();
+            
             TextBox21.Text = newnum;
             TextBox22.Text = newexp.ToString();
         }
@@ -1269,7 +1363,7 @@ if (number>0)
     }
     protected void reset()
     {
-        string resetValue = "0";
+        string resetValue = "-1";
         
         TextBox2.Text = resetValue;
         TextBox3.Text = resetValue;
@@ -1284,16 +1378,17 @@ if (number>0)
         TextBox12.Text = resetValue;
         TextBox13.Text = resetValue;
         TextBox14.Text = resetValue;
-        TextBox15.Text = resetValue;
-        TextBox16.Text = resetValue;
+        TextBox15.Text = "1";
+        TextBox16.Text = "1";
         TextBox17.Text = resetValue;
         TextBox18.Text = resetValue;
         TextBox19.Text = resetValue;
         TextBox20.Text = resetValue;
-        TextBox21.Text = resetValue;
-        TextBox22.Text = resetValue;
-        TextBox23.Text = resetValue;
-        ListBox4.Items.Clear();
+        TextBox21.Text = "0";
+        TextBox22.Text = "0";
+        
+        edices = 0;
+        sdices = 0;
         ListBox5.Items.Clear();
         ListBox6.Items.Clear();
 
@@ -1302,13 +1397,15 @@ if (number>0)
     protected void Button41_Click(object sender, EventArgs e)
     {
         int expback =Int32.Parse(TextBox22.Text);
+        int dices = Int32.Parse(TextBox21.Text);
         if (expback > 0)
         {
-            number = number + 1;
+            
             expback = expback - 1;
+            dices = dices + 1;
             TextBox22.Text = expback.ToString();
-            TextBox21.Text = number.ToString();
-            Label1.Text = number.ToString();
+            TextBox21.Text = dices.ToString();
+            
         }
     }
 
@@ -1320,7 +1417,40 @@ if (number>0)
         }
     }
 
-    protected void Button47_Click(object sender, EventArgs e)
+    protected void TextBox27_TextChanged(object sender, EventArgs e)
+    {
+        skillnumber = Int32.Parse(TextBox27.Text);
+        Label2.Text = skillnumber.ToString();
+        ListBox4.Items.Clear();
+        
+    }
+
+    protected void Button48_Click(object sender, EventArgs e)
+    {
+        if (number > 0)
+        {
+            double value=Int32.Parse(TextBox21.Text);
+            value = value + number;
+            number = 0;
+            
+            TextBox21.Text = value.ToString();
+            Label1.Text = number.ToString();
+        }
+    }
+
+    protected void Button49_Click(object sender, EventArgs e)
+    {
+        if (skillnumber > 0)
+        {
+            double value = Int32.Parse(TextBox21.Text);
+            value = value + skillnumber;
+            skillnumber = 0;
+            TextBox21.Text = value.ToString();
+            Label2.Text = skillnumber.ToString();
+            
+        }
+    }
+	protected void Button47_Click(object sender, EventArgs e)
     {
         SqlConnection insertConn = GetDBConnection();
         SqlCommand insertComm = new SqlCommand("INSERT INTO CHARACTER(" + 
@@ -1452,20 +1582,20 @@ if (number>0)
         StringWriter textWriterFlaws = new StringWriter();
 
         XmlSerializer serializerSkill = new XmlSerializer(typeof(List<Skill>));
-            XmlSerializer serializerPerk = new XmlSerializer(typeof(List<Perk>));
-            XmlSerializer serializerFlaw = new XmlSerializer(typeof(List<Flaw>));
+        XmlSerializer serializerPerk = new XmlSerializer(typeof(List<Perk>));
+        XmlSerializer serializerFlaw = new XmlSerializer(typeof(List<Flaw>));
 
-            serializerSkill.Serialize(textWriterSkills, skills);
-            SqlParameter SKILLSPAR = new SqlParameter("SKILLS", textWriterSkills.ToString());
-            insertComm.Parameters.Add(SKILLSPAR);
+        serializerSkill.Serialize(textWriterSkills, skills);
+        SqlParameter SKILLSPAR = new SqlParameter("SKILLS", textWriterSkills.ToString());
+        insertComm.Parameters.Add(SKILLSPAR);
 
-            serializerPerk.Serialize(textWriterPerks, perks);
-            SqlParameter PERKSPAR = new SqlParameter("PERKS", textWriterPerks.ToString());
-            insertComm.Parameters.Add(PERKSPAR);
+        serializerPerk.Serialize(textWriterPerks, perks);
+        SqlParameter PERKSPAR = new SqlParameter("PERKS", textWriterPerks.ToString());
+        insertComm.Parameters.Add(PERKSPAR);
 
-            serializerFlaw.Serialize(textWriterFlaws, flaws);
-            SqlParameter FLAWSPAR = new SqlParameter("FLAWS", textWriterFlaws.ToString());
-            insertComm.Parameters.Add(FLAWSPAR);
+        serializerFlaw.Serialize(textWriterFlaws, flaws);
+        SqlParameter FLAWSPAR = new SqlParameter("FLAWS", textWriterFlaws.ToString());
+        insertComm.Parameters.Add(FLAWSPAR);
        
         SqlParameter XPPAR = new SqlParameter("XP", TextBox22.Text);
         SqlParameter EDPAR = new SqlParameter("ED", TextBox21.Text);

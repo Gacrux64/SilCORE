@@ -67,17 +67,29 @@
     <br style="clear:both;" />
     <hr />
     <br />
+    <span>Skills: </span>
+    <br />
+    <br />
     <asp:Label ID="LabelSkills" runat="server" Text=""></asp:Label>
     <hr />
     <br />
     <div style="float:left;width:50%;"">
+        <span>Perks: </span>
+        <br />
+        <br />
         <asp:Label ID="LabelPerks" runat="server" Text=""></asp:Label>
     </div>
     <div style="float:left;width:50%;">
+        <span>Flaws: </span>
+        <br />
+        <br />
         <asp:Label ID="LabelFlaws" runat="server" Text=""></asp:Label>
     </div>
     <br style="clear:both;" />
     <hr />
+    <br />
+    <span>Misc: </span>
+    <br />
     <br />
     <asp:Label ID="LabelED" runat="server" Text=""></asp:Label>
     <br />

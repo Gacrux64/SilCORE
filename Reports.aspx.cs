@@ -18,7 +18,7 @@ public partial class Template_Default : System.Web.UI.Page
         else
         {
             SqlConnection userAdminConn = GetDBConnection();
-            SqlCommand getUserAdmin = new SqlCommand("SELECT USER_ADMIN, FROM USER_INFO WHERE USER_ID LIKE @UID", userAdminConn);
+            SqlCommand getUserAdmin = new SqlCommand("SELECT USER_ADMIN FROM USER_INFO WHERE USER_ID LIKE @UID", userAdminConn);
             SqlParameter userAdminPar = new SqlParameter("UID", Session["user"].ToString());
             getUserAdmin.Parameters.Add(userAdminPar);
 

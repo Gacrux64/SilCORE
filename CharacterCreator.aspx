@@ -32,81 +32,91 @@ Character Creator
     </script>
             <div id="smalldiv" style="width:30%; float:left;">
                     Name: <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    <asp:requiredfieldvalidator ID="RequiredFiledValidator" runat="server" errormessage="*Please give your charcter a name." ControlToValidate="TextBox1" ForeColor="Red"></asp:requiredfieldvalidator>
                     <br />
                     <br />
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <ContentTemplate>
                     GAME TYPE:
                     <asp:DropDownList ID="DropDownList18" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList18_SelectedIndexChanged">
-                        <asp:ListItem Value="10">Type 1</asp:ListItem>
-                        <asp:ListItem Value="30">Type 2</asp:ListItem>
-                        <asp:ListItem Value="50">Type 3</asp:ListItem>
+                        <asp:ListItem Value="20">Gritty</asp:ListItem>
+                        <asp:ListItem Value="30">Adventurous</asp:ListItem>
+                        <asp:ListItem Value="50">Cinematic</asp:ListItem>
                         <asp:ListItem Value="0">Custom</asp:ListItem>
                     </asp:DropDownList>
                     <br />
                     <div runat="server" visible="false" ID="customgame">
 
-                       CP: <asp:TextBox type="number" ID="TextBox23" runat="server" OnTextChanged="TextBox23_TextChanged" AutoPostBack="True"></asp:TextBox>
+                       CP: <asp:TextBox type="number" ID="TextBox23" runat="server" OnTextChanged="TextBox23_TextChanged" AutoPostBack="True"></asp:TextBox><br />
+                        SP:
+
+                        <asp:TextBox ID="TextBox27" runat="server" OnTextChanged="TextBox27_TextChanged" AutoPostBack="True">0</asp:TextBox>
+
+                        <br />
 
                     </div>
                     
-                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                        <ContentTemplate>
+                    
                             <br />
+                    
+                    
                             Character Points:<asp:Label ID="Label1" runat="server"></asp:Label>
+                            <br />
+                            <br />
+                         Primary Statistic:<br />
+                            <br />
+                    <span onmouseover="agility()">AGI </span>
                     <br />
-                    <br />
-
-                    <br />
-                    <br />
-                    <span onmouseover="agility()">AGI</span><br />
                 
                     <asp:Button ID="Button1" runat="server" Text="&lt;" OnClick="Button1_Click"  />
-                    <asp:TextBox ID="TextBox2" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button2" runat="server" Text="&gt;" OnClick="Button2_Click" />
                             
-                    <br />
+                            <br />
+                
                     <span onmouseover="appearance()">APP</span><br />
                     <asp:Button ID="Button3" runat="server" Text="&lt;" OnClick="Button3_Click" />
-                    <asp:TextBox ID="TextBox3" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button4" runat="server" Text="&gt;" OnClick="Button4_Click" />
                     <br />
                     <span onmouseover="build()">BLD</span><br />
                     <asp:Button ID="Button5" runat="server" Text="&lt;" OnClick="Button5_Click" />
-                    <asp:TextBox ID="TextBox4" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button6" runat="server" Text="&gt;" OnClick="Button6_Click" />
                     <br />
                     <span onmouseover="creativity()">CRE</span><br />
                     <asp:Button ID="Button7" runat="server" Text="&lt;" OnClick="Button7_Click" />
-                    <asp:TextBox ID="TextBox5" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox5" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button8" runat="server" Text="&gt;" OnClick="Button8_Click" />
                     <br />
                     <span onmouseover="fitness()">FIT</span><br />
                     <asp:Button ID="Button9" runat="server" Text="&lt;" OnClick="Button9_Click" />
-                    <asp:TextBox ID="TextBox6" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox6" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button10" runat="server" Text="&gt;" OnClick="Button10_Click" />
                     <br />
                     <span onmouseover="influence()">INF</span><br />
                     <asp:Button ID="Button11" runat="server" Text="&lt;" OnClick="Button11_Click" />
-                    <asp:TextBox ID="TextBox7" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox7" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button12" runat="server" Text="&gt;" OnClick="Button12_Click" />
                     <br />
                     <span onmouseover="knowledge()">KNO</span><br />
                     <asp:Button ID="Button13" runat="server" Text="&lt;" OnClick="Button13_Click" />
-                    <asp:TextBox ID="TextBox8" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox8" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button14" runat="server" Text="&gt;" OnClick="Button14_Click" />
                     <br />
                     <span onmouseover="perception()">PER</span><br />
                     <asp:Button ID="Button15" runat="server" Text="&lt;" OnClick="Button15_Click" />
-                    <asp:TextBox ID="TextBox9" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox9" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button16" runat="server" Text="&gt;" OnClick="Button16_Click" />
                     <br />
                     <span onmouseover="psyche()">PSY</span><br />
                     <asp:Button ID="Button17" runat="server" Text="&lt;" OnClick="Button17_Click" />
-                    <asp:TextBox ID="TextBox10" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox10" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button18" runat="server" Text="&gt;" OnClick="Button18_Click" />
                     <br />
                     <span onmouseover="willpower()">WIL</span><br />
                     <asp:Button ID="Button19" runat="server" Text="&lt;" OnClick="Button19_Click" />
-                    <asp:TextBox ID="TextBox11" runat="server" Width="40px" ReadOnly="True">0</asp:TextBox>
+                    <asp:TextBox ID="TextBox11" runat="server" Width="40px" ReadOnly="True">-1</asp:TextBox>
                     <asp:Button ID="Button20" runat="server" Text="&gt;" OnClick="Button20_Click" />
                     <br />
                     <br />
@@ -158,6 +168,7 @@ Character Creator
                 </div>
                 
     <div id="description" style="width:60%; height:450px; float:left">
+        <h2>&nbsp;</h2>
         <h2>Description: Primary Stats</h2>
         <p id="contentDescription" style="padding-top:7px">Hover over the Stat name in order to learn more about it</p>
         <table id="StatsTable">
@@ -167,7 +178,8 @@ Character Creator
     <br />
      <div id="description2" style=" width:60%; float:left">
         <h2>&nbsp;</h2>
-         <h2>&nbsp;Description: Secondary Stats</h2>
+         <h2>&nbsp;</h2>
+         <h2>Description: Secondary Stats</h2>
         <p id="secondaryDescription">Hover over the Stat name in order to learn more about it. Note: FLESH WOUND, DEEP WOUND, INSTANT DEATH have the same description for obvious reasons</p>
          <table id="secondStatsTable">
             
@@ -176,12 +188,15 @@ Character Creator
     <br />
     <br />
     <div style="clear:both;">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
                     <br />
-                    Skill, Perks and Flaws<br />
+                    Skill Points:<asp:Label ID="Label2" runat="server"></asp:Label>
+                            <br />
                     <br />
                     SKILLS<br />
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
+        
+                        
                     <asp:ListBox ID="ListBox1" style="vertical-align:top;" runat="server" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" Width="169px">
                         <asp:ListItem>Animal Handling</asp:ListItem>
                         <asp:ListItem>Archery</asp:ListItem>
@@ -234,6 +249,11 @@ Character Creator
                         <asp:ListItem Value="3">Level 3</asp:ListItem>
                         <asp:ListItem Value="4">Level 4</asp:ListItem>
                         <asp:ListItem Value="5">Level 5</asp:ListItem>
+                        <asp:ListItem Value="6">Level 6</asp:ListItem>
+                        <asp:ListItem Value="7">Level 7</asp:ListItem>
+                        <asp:ListItem Value="8">Level 8</asp:ListItem>
+                        <asp:ListItem Value="9">Level 9</asp:ListItem>
+                        <asp:ListItem Value="10">Level 10</asp:ListItem>
                     </asp:DropDownList><br />
                     <asp:DropDownList ID="DropDownList2"  runat="server" Width="104px">
                         <asp:ListItem Value="1">Complexity 1</asp:ListItem>
@@ -245,14 +265,19 @@ Character Creator
             </div>
         
                     
-                            <asp:Button ID="Button36" runat="server" OnClick="Button36_Click" Text="Add" />
-                            <asp:Button ID="Button35" runat="server" Text="Remove" OnClick="Button35_Click" />
+                            <asp:Button ID="Button36" runat="server" ValidationGroup="skilladd" OnClick="Button36_Click" Text="Add" />
+                            <asp:Button ID="Button35" runat="server" ValidationGroup="skillremove" Text="Remove" OnClick="Button35_Click" />
                             <asp:ListBox ID="ListBox4" runat="server"></asp:ListBox>
+                    <br />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="skilladd" runat="server" ControlToValidate="ListBox1" ErrorMessage="*Please choose a skill to add" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="ListBox4" Display="Dynamic" ErrorMessage="*Please choose a skill to remove" ForeColor="Red" ValidationGroup="skillremove"></asp:RequiredFieldValidator>
+                <asp:Label ID="Label5" runat="server" ForeColor="Red"></asp:Label>
                         </ContentTemplate>
                     </asp:UpdatePanel>
             
                     
-                    <br />
+                    
                     PERKS<br />         
         <asp:UpdatePanel ID="UpdatePanel2" runat="server" >
                         <ContentTemplate>
@@ -432,11 +457,14 @@ Character Creator
                                     
                                 </div>
                             </div>
-                    <asp:Button ID="Button37" runat="server" Text="Add" OnClick="Button37_Click" />
-                    <asp:Button ID="Button38" runat="server" Text="Remove" OnClick="Button38_Click" />
+                    <asp:Button ID="Button37" runat="server" ValidationGroup="perkadd" Text="Add" OnClick="Button37_Click" />
+                    <asp:Button ID="Button38" runat="server" ValidationGroup="perkremove" Text="Remove" OnClick="Button38_Click" />
                     <asp:ListBox ID="ListBox5" runat="server"></asp:ListBox>
                     <br />
-                            </ContentTemplate>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="perkadd" runat="server" ControlToValidate="ListBox2" ErrorMessage="*Please choose a perk to add" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator><asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="perkremove" runat="server" ControlToValidate="ListBox5" ErrorMessage="*Please choose a perk to remove" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:Label ID="Label4" runat="server" ForeColor="Red"></asp:Label>
+                             <asp:Label ID="Label6" runat="server" ForeColor="Red"></asp:Label>
+                             </ContentTemplate>
             </asp:UpdatePanel>
                     FLAWS<br />
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -484,9 +512,9 @@ Character Creator
                             <div runat="server" id="flawsDiv" style="vertical-align:top; float:right; position:relative; right:470px">
                                 <div runat="server" visible="false" id="flawsDiv1" style="position:absolute;right:-1px;">
 
-                                    <asp:TextBox ID="TextBox24" runat="server" onclick="this.value=''; this.style.color='black'" ForeColor="Gray" Width="104px">Drugs</asp:TextBox>
+                                    <asp:TextBox ID="TextBox24" runat="server" ValidationGroup="perkadd" onclick="this.value=''; this.style.color='black'" ForeColor="Gray" Width="104px">Drugs</asp:TextBox>
                                     <br />
-                                    <asp:TextBox  ID="TextBox25" runat="server" onclick="this.type='number'; this.min='3'; this.style.color='black'" ForeColor="Gray" Width="104px">Rating</asp:TextBox>
+                                    <asp:TextBox  ID="TextBox25" runat="server" ValidationGroup="perkadd" onclick="this.type='number'; this.min='3'; this.style.color='black'" ForeColor="Gray" Width="104px">Rating</asp:TextBox>
 
                                 </div>
                                 <div runat="server" visible="false" id="age">
@@ -678,9 +706,13 @@ Character Creator
                                 </div>
 
                             </div>
-                    <asp:Button ID="Button39" runat="server" Text="Add" OnClick="Button39_Click" />
-                    <asp:Button ID="Button40" runat="server" Text="Remove" OnClick="Button40_Click" />
-                    <asp:ListBox ID="ListBox6" runat="server"></asp:ListBox>
+                    <asp:Button ID="Button39" runat="server" ValidationGroup="flawadd"  Text="Add" OnClick="Button39_Click" />
+                    <asp:Button ID="Button40" runat="server" ValidationGroup="flawremove" Text="Remove" OnClick="Button40_Click" />
+                    <asp:ListBox ID="ListBox6" runat="server"></asp:ListBox><br />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="flawadd" runat="server" ControlToValidate="ListBox3" ErrorMessage="*Please choose a flaw to add" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="flawremove" runat="server" ControlToValidate="ListBox6" ErrorMessage="*Please choose a flaw to remove" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:Label ID="Label3" runat="server" ForeColor="Red"></asp:Label>
+                            <asp:Label ID="Label7" runat="server" ForeColor="Red"></asp:Label>
                 </ContentTemplate>
             </asp:UpdatePanel>
                     <br />
@@ -689,8 +721,12 @@ Character Creator
                     <br />
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                         <ContentTemplate>
+                            <asp:Button ID="Button48" runat="server" OnClick="Button48_Click" Text="Convert CP to Dices" Width="138px" />
+                            <br />
+                            <asp:Button ID="Button49" runat="server" Text="Convert SP to Dices" Width="138px" OnClick="Button49_Click" />
+                            <br />
                             EMERGENCY DICE<br />
-                            <asp:TextBox ID="TextBox21" runat="server" ReadOnly="True" Width="40px"></asp:TextBox>
+                            <asp:TextBox ID="TextBox21" runat="server" ReadOnly="True" Width="40px">0</asp:TextBox>
                             <asp:Button ID="Button42" runat="server" OnClick="Button42_Click" Text="Convert to Exp" />
                     <br />
                             EXP<br />

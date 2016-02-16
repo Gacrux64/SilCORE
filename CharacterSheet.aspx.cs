@@ -60,11 +60,13 @@ public partial class CharacterSheet : System.Web.UI.Page
                     LabelID.Text = "ID: " + sqlReader["CHARACTER_SEC_INSTANT_DEATH"].ToString();
                     LabelSS.Text = "SS: " + sqlReader["CHARACTER_SEC_SYSTEM_SHOCK"].ToString();
 
-                    XmlSerializer serialize = new XmlSerializer(typeof(List<Skill>));
+                    XmlSerializer serializeSkill = new XmlSerializer(typeof(List<Skill>));
+                    XmlSerializer serializePerk = new XmlSerializer(typeof(List<Perk>));
+                    XmlSerializer serializeFlaw = new XmlSerializer(typeof(List<Flaw>));
 
                     //Code to handle skills
                     List<Skill> skills = new List<Skill>();
-                    skills = (List<Skill>)serialize.Deserialize(new StringReader(sqlReader["CHARACTER_SKILLS"].ToString()));
+                    skills = (List<Skill>)serializeSkill.Deserialize(new StringReader(sqlReader["CHARACTER_SKILLS"].ToString()));
                     foreach (Skill skill in skills)
                     {
                         LabelSkills.Text += skill.getSkillInfo() + "<br />";
@@ -72,7 +74,7 @@ public partial class CharacterSheet : System.Web.UI.Page
 
                     //Code to handle perks
                     List<Perk> perks = new List<Perk>();
-                    perks = (List<Perk>)serialize.Deserialize(new StringReader(sqlReader["CHARACTER_PERKS"].ToString()));
+                    perks = (List<Perk>)serializePerk.Deserialize(new StringReader(sqlReader["CHARACTER_PERKS"].ToString()));
                     foreach (Perk perk in perks)
                     {
                         LabelPerks.Text += perk.getPerkInfo() + "<br />";
@@ -80,7 +82,7 @@ public partial class CharacterSheet : System.Web.UI.Page
 
                     //Code to handle flaws
                     List<Flaw> flaws = new List<Flaw>();
-                    flaws = (List<Flaw>)serialize.Deserialize(new StringReader(sqlReader["CHARACTER_FLAWS"].ToString()));
+                    flaws = (List<Flaw>)serializeFlaw.Deserialize(new StringReader(sqlReader["CHARACTER_FLAWS"].ToString()));
                     foreach (Flaw flaw in flaws)
                     {
                         LabelFlaws.Text += flaw.getFlawInfo() + "<br />";

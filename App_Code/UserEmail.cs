@@ -21,7 +21,7 @@ namespace NewUser
                           "More features will be added soon!" +
                           "\n\nIf you have any questions, concerns, or want to report a bug, you can contact the developers at SilCORECB@Gmail.com. " +
                           "We hope you find the tool useful." +
-                          "\n\n-Matt, SilCORECB lead developer";
+                          "\n\n- Matt, SilCORECB co-developer";
 
             return body;
         }
